@@ -39,30 +39,30 @@ const closeModal = modalStore.closeModal;
         >
             <div class="modal-content">
                 <div v-if="modalType === 'confirmDelete'">
-                    <p class="text-center">Delete note: <span class="p-1 bg-lime-100 rounded">{{ modalData.title
+                    <p class="text-center mt-2">Delete note: <span class="p-1 bg-lime-100 rounded">{{ modalData.title
                             }}</span> ?</p>
-                    <div class="flex justify-center mt-5">
+                    <div class="flex justify-center mt-2.5">
                         <button
                             @click="confirmDelete(modalData.id)"
-                            class="btn p-3 m-3 w-20 "
-                        >Да</button>
+                            class="btn p-3 mx-3 w-20 "
+                        >Yes</button>
                         <button
                             @click="closeModal"
-                            class="btn p-3 m-3 w-20 "
-                        >Нет</button>
+                            class="btn p-3 mx-3 w-20 "
+                        >No</button>
                     </div>
                 </div>
                 <div v-else-if="modalType === 'comfirmDiscardChanges'">
-                    <p class="text-center">Cancel changes?</p>
-                    <div class="flex justify-center mt-5">
+                    <p class="text-center mt-2">Cancel changes?</p>
+                    <div class="flex justify-center mt-2.5">
                         <button
                             @click="confirmDiscardChanges"
                             class="btn p-3 m-3 w-20 "
-                        >Да</button>
+                        >Yes</button>
                         <button
                             @click="closeModal"
                             class="btn p-3 m-3 w-20 "
-                        >Нет</button>
+                        >No</button>
                     </div>
                 </div>
 

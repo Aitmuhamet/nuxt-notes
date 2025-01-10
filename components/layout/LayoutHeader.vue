@@ -6,12 +6,20 @@ const noteStore = useNoteStore();
 import { useModalStore } from '~/store/modalStore';
 const modalStore = useModalStore();
 
+const router = useRouter();
 const route = useRoute()
 const isNotePage = computed(() => route.path.includes('/note'));
 
 const discardChanges = () => {
-  if (route.path !== '/') {
+  console.log('route.path:', route.path);
+  console.log('noteStore:', noteStore.currentStep);
+  
+  if (route.path !== '/' && noteStore.currentStep !== 0) {
     modalStore.openModal('comfirmDiscardChanges');
+  } else if (route.path !== '/' && noteStore.currentStep === 0) {
+    console.log('router.push');
+    
+    router.push('/');
   }
 }
 
@@ -21,7 +29,6 @@ const isNoteTitleEmpty = () => {
   return noteStore.currentNote.title.length === 0;
 }
 
-const router = useRouter();
 const saveAndNavigate = () => {
   if (!isNoteTitleEmpty()) {
     noteStore.saveNote();
@@ -92,7 +99,7 @@ onBeforeUnmount(() => {
         @click="saveAndNavigate()"
       >
         <Icon
-          name="material-symbols:check-rounded"
+          name="solar:round-alt-arrow-down-line-duotone"
           class="text-amber-300 text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
         />
       </button>
@@ -102,7 +109,7 @@ onBeforeUnmount(() => {
         v-else
       >
         <Icon
-          name="mdi-light:plus"
+          name="solar:traffic-economy-line-duotone"
           class=" text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
         />
       </Nuxt-Link>
@@ -121,7 +128,9 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(var(--primary-color), .4);
+  // border: 1px solid rgba(var(--primary-color), .4);
+  background-color: transparent;
+  border: none;
   border-radius: 5px;
   color: rgba(var(--primary-color), .8);
   font-size: 3rem;

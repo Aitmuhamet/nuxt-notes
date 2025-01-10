@@ -35,7 +35,7 @@ console.log('canRedo: ', canRedo.value);
       :disabled="!canUndo"
     >
       <Icon
-        name="mingcute:back-2-line"
+        name="solar:double-alt-arrow-left-broken"
         class="text-4xl md:text-5xl hover:text-neutral-900"
       />
     </button>
@@ -45,7 +45,7 @@ console.log('canRedo: ', canRedo.value);
       :disabled="!canRedo"
     >
       <Icon
-        name="mingcute:forward-2-line"
+        name="solar:double-alt-arrow-right-broken"
         class="text-4xl md:text-5xl hover:text-neutral-900"
       />
     </button>
@@ -55,7 +55,7 @@ console.log('canRedo: ', canRedo.value);
       @click="deleteNote(note)"
     >
       <Icon
-        name="material-symbols:delete-outline-rounded"
+        name="solar:trash-bin-minimalistic-2-broken"
         class="text-4xl md:text-5xl  hover:text-neutral-900"
       />
     </button>
@@ -65,7 +65,7 @@ console.log('canRedo: ', canRedo.value);
       @click="discardChanges()"
     >
       <Icon
-        name="material-symbols:close-rounded"
+        name="solar:close-circle-broken"
         class="text-red-500 text-4xl md:text-5xl "
       />
     </button>
@@ -87,7 +87,9 @@ console.log('canRedo: ', canRedo.value);
     padding: .5rem;
 
     &:disabled {
-      background: rgb(var(--primary-color), .1);
+      background: rgba(var(--primary-color), .1);
+      background: transparent;
+      color: rgb(var(--primary-color));
     }
   }
 }

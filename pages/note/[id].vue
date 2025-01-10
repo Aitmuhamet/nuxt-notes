@@ -20,6 +20,7 @@ onMounted(() => {
 const prepareNote = () => {
     const isValidId = !isNaN(Number(id.value));
     if (isValidId) {
+        noteStore.resetHistory();
         noteStore.prepareNoteForEditing(Number(id.value));
     } else {
         noteStore.createNewNote();
@@ -64,7 +65,7 @@ const tasks = computed({
                         @click="noteStore.deleteTask(task.id)"
                     >
                         <Icon
-                            name="material-symbols:delete-outline-rounded"
+                            name="solar:trash-bin-minimalistic-2-broken"
                             class="text-lg"
                         />
                     </button>

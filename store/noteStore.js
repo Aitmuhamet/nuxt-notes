@@ -60,11 +60,6 @@
                         text: "Морковь",
                         isCompleted: false,
                     },
-                    {
-                        id: 304,
-                        text: "Любовь",
-                        isCompleted: false,
-                    },
                 ],
             },
 
@@ -351,17 +346,17 @@
                 // console.log("JSON.stringify(oldNote) === JSON.stringify(newNote)): ", JSON.stringify(oldNote) === JSON.stringify(newNote));
                 // console.log("JSON.stringify(history.value[currentStep.value]: ", JSON.stringify(history.value[currentStep.value]));
                 // console.log("JSON.stringify(newNote)): ", JSON.stringify(newNote));
-                // console.groupEnd();
+                console.groupEnd();
 
                 if (JSON.stringify(oldNote) === JSON.stringify(newNote)) {
                     // Запускаю updateNote, когда вносятся изменения в Note вручную
                     updateNote(newNote);
                     // Нужно условие, которое проверяет не является ли новое значение currentNote на то, не является оно предыдущим значением currentNote
                 }
-                // console.group("watch: currentNote OUT");
-                // console.log("currentNote: ", toRaw(currentNote.value));
-                // console.log("history: ", toRaw(history.value));
-                // console.log("currentStep: ", currentStep.value);
+                console.group("watch: currentNote OUT");
+                console.log("currentNote: ", toRaw(currentNote.value));
+                console.log("history: ", toRaw(history.value));
+                console.log("currentStep: ", currentStep.value);
                 console.groupEnd();
             },
             { deep: true }

@@ -1,5 +1,6 @@
 :root {
-    --primary-color: 114, 192, 192;
+    --test-color: rgba(241, 246, 246, 0.142);
+    --primary-color: 115, 115, 115;
     --secondary-color: #f9f9f9;
     --text-color: #333;
     --bg-color: #f9d07056;
@@ -10,7 +11,6 @@
     font-size: 14px;
     border-radius: 10px;
     cursor: pointer;
-    background: var(--bg-color);
     transition: background-color 300ms, transform 100ms, box-shadow 300ms;
     display: flex;
     align-items: center;
@@ -21,6 +21,7 @@
 .btn:hover {
     transform: scale(1.1);
     background-color: transparent;
+    background: var(--bg-color);
     // opacity: 0.7;
 }
 .btn:active {
@@ -29,6 +30,12 @@
 }
 .btn:focus {
     outline: none;
+}
+.btn:disabled {
+    color: rgb(var(--primary-color));
+
+    transform: scale(1);
+    opacity: .1;
 }
 
 .btn_green {

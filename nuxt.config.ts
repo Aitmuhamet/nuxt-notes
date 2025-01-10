@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: "en", translate: "no" },
     },
+    baseURL: '/nuxt-notes/', // Добавьте это для корректного базового пути
   },
   modules: [
     "@pinia/nuxt",
@@ -32,4 +33,5 @@ export default defineNuxtConfig({
     ],
   ],
   css: ["~/assets/scss/main.scss"],
+  target: 'static',
 });

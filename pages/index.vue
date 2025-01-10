@@ -60,7 +60,7 @@ const deleteNote = (note) => {
             type="button"
           >
             <Icon
-              name="material-symbols:delete-outline-rounded"
+              name="solar:trash-bin-minimalistic-2-broken"
               class="text-sm lg:text-xl hover:text-neutral-900"
             />
           </button>
