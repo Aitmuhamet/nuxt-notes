@@ -1,9 +1,10 @@
 <script setup>
+import { computed } from 'vue';
 import { useNoteStore } from '~/store/noteStore';
 const noteStore = useNoteStore();
 
 onMounted(() => {
-  noteStore.loadNotesFromLocalStorage(); 
+  noteStore.loadNotesFromLocalStorage();
 })
 
 import { useModalStore } from '~/store/modalStore';
@@ -19,6 +20,10 @@ const navigateWithReset = (id) => {
 
 const deleteNote = (note) => {
   modalStore.openModal('confirmDelete', note);
+}
+
+const first3Tasks = (tasks) => {
+  return tasks.slice(0, 3);
 }
 
 </script>
@@ -40,7 +45,7 @@ const deleteNote = (note) => {
         </h3>
         <ul class="tasks m-2 md:m-4 text-slate-700 flex flex-col items-stretch">
           <li
-            v-for="(task) in note.tasks"
+            v-for="(task) in first3Tasks(note.tasks)"
             :key="task.id"
             class="tasks__item"
           >
@@ -54,18 +59,18 @@ const deleteNote = (note) => {
             {{ task.text }}
           </li>
         </ul>
-          <button
-            class="header__btn btn w-8 h-8 p-0.5 absolute bottom-1 right-1 opacity-0"
-            @click.stop="deleteNote(note)"
-            type="button"
-          >
-            <Icon
-              name="solar:trash-bin-minimalistic-2-broken"
-              class="text-sm lg:text-xl hover:text-neutral-900"
-            />
-          </button>
+        <button
+          class="header__btn btn w-8 h-8 p-0.5 absolute bottom-1 right-1 opacity-0"
+          @click.stop="deleteNote(note)"
+          type="button"
+        >
+          <Icon
+            name="solar:trash-bin-minimalistic-2-broken"
+            class="text-sm lg:text-xl hover:text-neutral-900"
+          />
+        </button>
       </div>
-  
+
       <ConfirmDialog></ConfirmDialog>
       <!-- Добавьте столько заметок, сколько нужно -->
     </div>
@@ -73,7 +78,6 @@ const deleteNote = (note) => {
 </template>
 
 <style lang="scss" scoped>
-
 /* Стили для каждой заметки */
 .note {
   break-inside: avoid;
@@ -88,6 +92,7 @@ const deleteNote = (note) => {
       display: flex;
       align-items: center;
     }
+
     &__checkbox {
       width: 15px;
       height: 15px;
@@ -107,9 +112,11 @@ const deleteNote = (note) => {
   font-size: 18px;
   font-weight: bold;
 }
+
 .note .btn {
   transition: opacity .5s, transform .5s;
 }
+
 .note:hover .btn {
   opacity: 1;
 

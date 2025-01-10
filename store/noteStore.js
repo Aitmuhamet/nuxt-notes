@@ -3,130 +3,7 @@
     import { ref, watch, toRaw } from "vue";
 
     export const useNoteStore = defineStore("notes", () => {
-        const notesData = ref([
-            {
-                id: 1,
-                title: "Покупки",
-                tasks: [
-                    {
-                        id: 101,
-                        text: "Купить хлеб",
-                        isCompleted: false,
-                    },
-                    {
-                        id: 102,
-                        text: "Купить молоко",
-                        isCompleted: true,
-                    },
-                ],
-            },
-            {
-                id: 2,
-                title: "Рабочие задачи",
-                tasks: [
-                    {
-                        id: 201,
-                        text: "Написать отчет",
-                        isCompleted: false,
-                    },
-                    {
-                        id: 202,
-                        text: "Проверить почту",
-                        isCompleted: true,
-                    },
-                    {
-                        id: 203,
-                        text: "Позвонить клиенту",
-                        isCompleted: false,
-                    },
-                ],
-            },
-            {
-                id: 3,
-                title: "Состав плова",
-                tasks: [
-                    {
-                        id: 301,
-                        text: "Рис",
-                        isCompleted: false,
-                    },
-                    {
-                        id: 302,
-                        text: "Мясо",
-                        isCompleted: true,
-                    },
-                    {
-                        id: 303,
-                        text: "Морковь",
-                        isCompleted: false,
-                    },
-                ],
-            },
-
-            {
-                id: 4,
-                title: "Утренняя рутина",
-                tasks: [
-                    {
-                        id: 401,
-                        text: "Проснуться",
-                        isCompleted: true,
-                    },
-                    {
-                        id: 402,
-                        text: "Сделать зарядку",
-                        isCompleted: false,
-                    },
-                    {
-                        id: 403,
-                        text: "Позавтракать",
-                        isCompleted: false,
-                    },
-                ],
-            },
-            {
-                id: 5,
-                title: "Подготовка к отпуску",
-                tasks: [
-                    {
-                        id: 501,
-                        text: "Купить билеты",
-                        isCompleted: true,
-                    },
-                    {
-                        id: 502,
-                        text: "Собрать чемодан",
-                        isCompleted: false,
-                    },
-                    {
-                        id: 503,
-                        text: "Оформить страховку",
-                        isCompleted: false,
-                    },
-                ],
-            },
-            {
-                id: 6,
-                title: "Учебный план",
-                tasks: [
-                    {
-                        id: 601,
-                        text: "Прочитать главу по Vue.js",
-                        isCompleted: false,
-                    },
-                    {
-                        id: 602,
-                        text: "Посмотреть урок по TypeScript",
-                        isCompleted: false,
-                    },
-                    {
-                        id: 603,
-                        text: "Решить задачи по алгоритмам",
-                        isCompleted: false,
-                    },
-                ],
-            },
-        ]);
+        const notesData = ref([]);
 
         const localStorageStore = useLocalStorageStore();
 
@@ -165,13 +42,7 @@
             currentNote.value = {
                 id: null,
                 title: "",
-                tasks: [
-                    {
-                        id: null,
-                        text: "New task",
-                        isCompleted: false,
-                    },
-                ],
+                tasks: [],
             };
         };
 
