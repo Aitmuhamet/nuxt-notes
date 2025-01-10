@@ -1,0 +1,149 @@
+<script setup lang="ts">
+import { ref, watchEffect, onMounted, onBeforeUnmount } from 'vue'
+import { useNoteStore } from '~/store/noteStore';
+const noteStore = useNoteStore();
+
+import { useModalStore } from '~/store/modalStore';
+const modalStore = useModalStore();
+
+const route = useRoute()
+const isNotePage = computed(() => route.path.includes('/note'));
+
+const discardChanges = () => {
+  if (route.path !== '/') {
+    modalStore.openModal('comfirmDiscardChanges');
+  }
+}
+
+const labelInput = ref<HTMLInputElement | null>(null);
+
+const isNoteTitleEmpty = () => {
+  return noteStore.currentNote.title.length === 0;
+}
+
+const router = useRouter();
+const saveAndNavigate = () => {
+  if (!isNoteTitleEmpty()) {
+    noteStore.saveNote();
+    noteStore.resetHistory();
+    router.push('/');
+  }
+}
+
+const note = computed({
+  get: () => noteStore.currentNote,
+  set: (value) => noteStore.currentNote = value
+});
+
+watchEffect(() => {
+  if (labelInput.value) {
+    labelInput.value.focus()
+  }
+})
+
+const handleKeydown = (event) => {
+  if (event.code === 'Enter' && route.path !== '/') {
+    saveAndNavigate();
+  } else if (event.code  === 'Space' && route.path === '/') {
+    router.push('/note/[new]')
+  } else if (event.code === 'Escape' && route.path !== '/') {
+    discardChanges();
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeydown)
+})
+
+</script>
+
+<template>
+  <header class="header container mx-auto my-4 flex items-center justify-start rounded-xl">
+    <button @click="discardChanges" to="/">
+      <img
+        src="/logo.svg"
+        alt="Logo"
+        class="header-logo p-2 h-4"
+      />
+    </button>
+
+    <h1
+      v-if="!isNotePage"
+      class="header__title w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pe-4 cursor-pointer"
+    ><Nuxt-link to="/note/[new]">My Note</Nuxt-link></h1>
+    <input
+      v-else
+      type="text"
+      v-model="note.title"
+      placeholder="My Note"
+      ref="labelInput"
+      class="header__title bg-transparent w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold focus:outline-none pe-4"
+    />
+
+    <div class="header-actions text-xl lg:text-5xl flex gap-1 pe-4">
+      <button
+        type="button"
+        class="btn header__btn"
+        v-if="isNotePage"
+        @click="saveAndNavigate()"
+      >
+        <Icon
+          name="material-symbols:check-rounded"
+          class="text-amber-300 text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
+        />
+      </button>
+      <Nuxt-Link
+        to="/note/[new]"
+        class="btn header__btn hover:text-amber-500"
+        v-else
+      >
+        <Icon
+          name="mdi-light:plus"
+          class=" text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
+        />
+      </Nuxt-Link>
+    </div>
+  </header>
+</template>``
+
+<style lang="scss" scoped>
+.header {
+  border: 1px solid rgba(var(--primary-color), .3);
+  font-family: 'Raleway', sans-serif;
+  height: auto;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(var(--primary-color), .4);
+  border-radius: 5px;
+  color: rgba(var(--primary-color), .8);
+  font-size: 3rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5em;
+  will-change: filter;
+  transition: filter 300ms;
+
+  @media (min-width: 768px) {
+    height: unset;
+  }
+}
+
+.header-actions {
+  margin-left: auto;
+
+}
+</style>
