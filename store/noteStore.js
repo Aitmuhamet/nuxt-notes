@@ -137,12 +137,19 @@
 
         const loadNotesFromLocalStorage = () => {
             const storedNotes = localStorageStore.getFromLocalStorage("notes");
+            console.log('storedNotes: ', storedNotes);
+            
             if (Array.isArray(storedNotes)) {
                 notesData.value = storedNotes;
             } else {
-                // console.warn("Invalid data in localStorage, resetting to default");
+                console.warn("Invalid data in localStorage, resetting to default");
+                // notesData.value = [];
             }
         };
+
+        const init = () => {
+            loadNotesFromLocalStorage()
+        }
 
         const saveNotesToLocalStorage = () => {
             localStorageStore.saveToLocalStorage("notes", notesData.value);
@@ -378,7 +385,7 @@
         });
 
         onMounted(() => {
-            // loadNotesFromLocalStorage();
+            loadNotesFromLocalStorage();
             // resetHistory();
         });
 
@@ -387,6 +394,7 @@
             currentNote,
             currentStep,
             history,
+            init,
             deleteTask,
             createNewTask,
             generateNoteId,

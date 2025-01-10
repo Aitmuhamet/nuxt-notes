@@ -2,6 +2,10 @@
 import { useNoteStore } from '~/store/noteStore';
 const noteStore = useNoteStore();
 
+onMounted(() => {
+  noteStore.loadNotesFromLocalStorage(); 
+})
+
 import { useModalStore } from '~/store/modalStore';
 import ConfirmDialog from '~/components/ConfirmDialog.vue';
 const modalStore = useModalStore();
@@ -20,50 +24,52 @@ const deleteNote = (note) => {
 </script>
 
 <template>
-  <div
-    translate="no"
-    class="notes-container container mx-auto sm:columns-3 lg:columns-3 xl:columns-4 gap-4 h-full hover:cursor-pointer"
-  >
+  <ClientOnly>
     <div
-      class="note overflow-hidden pb-6 hover:scale-[1.03] transition-transform duration-300 ease-in-out relative"
-      v-for="(note) in noteStore.notes"
-      :key="note.id"
-      @click="navigateWithReset(note.id)"
+      translate="no"
+      class="notes-container container mx-auto sm:columns-3 lg:columns-3 xl:columns-4 gap-4 h-full hover:cursor-pointer"
     >
-      <h3 class="note-title p-2 md:p-4 text-slate-600 bg-orange-300 flex justify-between items-center">
-        {{ note.title }}
-      </h3>
-      <ul class="tasks m-2 md:m-4 text-slate-700 flex flex-col items-stretch">
-        <li
-          v-for="(task) in note.tasks"
-          :key="task.id"
-          class="tasks__item"
-        >
-          <input
-            type="checkbox"
-            :id="'task' + task.id"
-            v-model="task.isCompleted"
-            class="tasks__checkbox checkbox"
-            disabled
-          />
-          {{ task.text }}
-        </li>
-      </ul>
-        <button
-          class="header__btn btn w-8 h-8 p-0.5 absolute bottom-1 right-1 opacity-0"
-          @click.stop="deleteNote(note)"
-          type="button"
-        >
-          <Icon
-            name="material-symbols:delete-outline-rounded"
-            class="text-sm lg:text-xl hover:text-neutral-900"
-          />
-        </button>
+      <div
+        class="note overflow-hidden pb-6 hover:scale-[1.03] transition-transform duration-300 ease-in-out relative"
+        v-for="(note) in noteStore.notes"
+        :key="note.id"
+        @click="navigateWithReset(note.id)"
+      >
+        <h3 class="note-title p-2 md:p-4 text-slate-600 bg-orange-300 flex justify-between items-center">
+          {{ note.title }}
+        </h3>
+        <ul class="tasks m-2 md:m-4 text-slate-700 flex flex-col items-stretch">
+          <li
+            v-for="(task) in note.tasks"
+            :key="task.id"
+            class="tasks__item"
+          >
+            <input
+              type="checkbox"
+              :id="'task' + task.id"
+              v-model="task.isCompleted"
+              class="tasks__checkbox checkbox"
+              disabled
+            />
+            {{ task.text }}
+          </li>
+        </ul>
+          <button
+            class="header__btn btn w-8 h-8 p-0.5 absolute bottom-1 right-1 opacity-0"
+            @click.stop="deleteNote(note)"
+            type="button"
+          >
+            <Icon
+              name="material-symbols:delete-outline-rounded"
+              class="text-sm lg:text-xl hover:text-neutral-900"
+            />
+          </button>
+      </div>
+  
+      <ConfirmDialog></ConfirmDialog>
+      <!-- Добавьте столько заметок, сколько нужно -->
     </div>
-
-    <ConfirmDialog></ConfirmDialog>
-    <!-- Добавьте столько заметок, сколько нужно -->
-  </div>
+  </ClientOnly>
 </template>
 
 <style lang="scss" scoped>

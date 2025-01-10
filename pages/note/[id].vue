@@ -12,12 +12,19 @@ const id = ref(route.params.id);
 
 
 const noteStore = useNoteStore();
-const isValidId = !isNaN(Number(id.value));
-if (isValidId) {
-    noteStore.prepareNoteForEditing(Number(id.value));
-} else {
-    noteStore.createNewNote();
-    console.log('currentNote:', noteStore.currentNote);
+onMounted(() => {
+  noteStore.loadNotesFromLocalStorage(); 
+  prepareNote();
+})
+
+const prepareNote = () => {
+    const isValidId = !isNaN(Number(id.value));
+    if (isValidId) {
+        noteStore.prepareNoteForEditing(Number(id.value));
+    } else {
+        noteStore.createNewNote();
+        console.log('currentNote:', noteStore.currentNote);
+    }
 }
 
 const tasks = computed({
@@ -29,47 +36,49 @@ const tasks = computed({
 </script>
 
 <template>
-    <div class="note container mx-auto">
-        <h2 class="note__title text-sm">Tasks:</h2>
-        <form submit.prevent="noteStore.saveNote">
-            <div
-                v-for="task in tasks"
-                :key="task.id"
-                class="task"
-            >
-                <input
-                    type="checkbox"
-                    :id="'task-' + task.id"
-                    v-model="task.isCompleted"
-                    class="checkbox task__checkbox"
-                />
-                <input
-                    type="text"
-                    v-model="task.text"
-                    :class="{ 'completed': task.isCompleted }"
-                    :id="'text-' + task.id"
-                    class="task__text my-2 bg-transparent outline-0"
-                />
+    <ClientOnly>
+        <div class="note container mx-auto">
+            <h2 class="note__title text-sm">Tasks:</h2>
+            <form submit.prevent="noteStore.saveNote">
+                <div
+                    v-for="task in tasks"
+                    :key="task.id"
+                    class="task"
+                >
+                    <input
+                        type="checkbox"
+                        :id="'task-' + task.id"
+                        v-model="task.isCompleted"
+                        class="checkbox task__checkbox"
+                    />
+                    <input
+                        type="text"
+                        v-model="task.text"
+                        :class="{ 'completed': task.isCompleted }"
+                        :id="'text-' + task.id"
+                        class="task__text my-2 bg-transparent outline-0"
+                    />
+                    <button
+                        type="button"
+                        class="btn task__btn self-center p-3 opacity-0 ms-auto"
+                        @click="noteStore.deleteTask(task.id)"
+                    >
+                        <Icon
+                            name="material-symbols:delete-outline-rounded"
+                            class="text-lg"
+                        />
+                    </button>
+                </div>
                 <button
                     type="button"
-                    class="btn task__btn self-center p-3 opacity-0 ms-auto"
-                    @click="noteStore.deleteTask(task.id)"
-                >
-                    <Icon
-                        name="material-symbols:delete-outline-rounded"
-                        class="text-lg"
-                    />
-                </button>
-            </div>
-            <button
-                type="button"
-                @click="noteStore.createNewTask()"
-                class="btn p-3 my-4"
-            >Create new task</button>
-        </form>
-
-        <!-- <pre>notes: {{ noteStore.currentNote }}</pre> -->
-    </div>
+                    @click="noteStore.createNewTask()"
+                    class="btn p-3 my-4"
+                >Create new task</button>
+            </form>
+    
+            <!-- <pre>notes: {{ noteStore.currentNote }}</pre> -->
+        </div>
+    </ClientOnly>
 </template>
 
 <style lang="scss" scoped>
