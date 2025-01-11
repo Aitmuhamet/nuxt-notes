@@ -1,0 +1,1 @@
+import{Y as t,r as e}from"./7dZDTWwZ.js";const c=t("modalStore",()=>{const l=e(!1),o=e(null),a=e(null);return{isModalVisible:l,modalData:o,modalType:a,openModal:(s,n=null)=>{a.value=s,l.value=!0,o.value=n},closeModal:()=>{l.value=!1,o.value=null}}});export{c as u};
