@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   ssr: false,
   app: {
-    baseURL: '/nuxt-notes/', // вместо router.base
+    baseURL: '/', // вместо router.base
     buildAssetsDir: '/_nuxt/' // добавляем это для правильного пути к ассетам
   },
   modules: [
