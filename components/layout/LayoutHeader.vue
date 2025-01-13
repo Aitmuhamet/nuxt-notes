@@ -99,7 +99,7 @@ onBeforeUnmount(() => {
         @click="saveAndNavigate()"
       >
         <Icon
-          name="solar:round-alt-arrow-down-line-duotone"
+          name="solar:archive-check-broken"
           class="text-amber-300 text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
         />
       </button>

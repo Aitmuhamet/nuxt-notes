@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   compatibilityDate: "2024-11-01",
   devtools: { enabled: false },
   app: {
@@ -33,5 +34,4 @@ export default defineNuxtConfig({
     ],
   ],
   css: ["~/assets/scss/main.scss"],
-  target: 'static',
 });

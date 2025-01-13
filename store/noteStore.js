@@ -3,7 +3,19 @@
     import { ref, watch, toRaw } from "vue";
 
     export const useNoteStore = defineStore("notes", () => {
-        const notesData = ref([]);
+        const notesData = ref([
+            {
+                id: 1,
+                title: "Note #1",
+                tasks: [
+                    {
+                        id: 101,
+                        text: "New Task",
+                        isCompleted: false,
+                    },
+                ],
+            },
+        ]);
 
         const localStorageStore = useLocalStorageStore();
 

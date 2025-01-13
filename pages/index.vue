@@ -56,7 +56,9 @@ const first3Tasks = (tasks) => {
               class="tasks__checkbox checkbox"
               disabled
             />
-            {{ task.text }}
+            <p class="tasks__text">
+              {{ task.text }}
+            </p>
           </li>
         </ul>
         <button
@@ -91,6 +93,15 @@ const first3Tasks = (tasks) => {
     &__item {
       display: flex;
       align-items: center;
+    }
+    
+    &__text {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      text-overflow: ellipsis;
     }
 
     &__checkbox {
