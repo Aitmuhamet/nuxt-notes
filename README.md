@@ -127,7 +127,6 @@ project/
 - Keep components small and focused
 - Use TypeScript for better type safety
 - Implement proper error handling
-- Write unit tests for critical functionality
 
 ### Git Workflow
 - Use feature branches
