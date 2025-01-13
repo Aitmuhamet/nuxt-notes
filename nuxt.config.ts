@@ -7,7 +7,9 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: "en", translate: "no" },
     },
-    baseURL: '/nuxt-notes/', // Добавьте это для корректного базового пути
+  },
+  router: {
+    base: '/nuxt-notes/',
   },
   modules: [
     "@pinia/nuxt",
