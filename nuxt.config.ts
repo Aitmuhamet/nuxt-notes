@@ -1,15 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
-  compatibilityDate: "2024-11-01",
-  devtools: { enabled: false },
   app: {
-    head: {
-      htmlAttrs: { lang: "en", translate: "no" },
-    },
-  },
-  router: {
-    base: '/nuxt-notes/',
+    baseURL: '/nuxt-notes/', // вместо router.base
+    buildAssetsDir: '/_nuxt/' // добавляем это для правильного пути к ассетам
   },
   modules: [
     "@pinia/nuxt",

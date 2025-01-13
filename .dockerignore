@@ -1,7 +1,8 @@
 node_modules
-npm-debug.log
-docker-compose.yml
-.dockerignore
+dist
 .git
 .gitignore
+docker-compose.yml
+npm-debug.log
+.dockerignore
 .DS_Store
