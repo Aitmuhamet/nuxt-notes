@@ -13,25 +13,6 @@ Each note has a name and a todo list, hereinafter referred to as Todo. Each Todo
 
 ## Installation and Launch
 
-### Docker Deployment
-
-1. Ensure Docker and Docker Compose are installed on your system
-
-2. Build and launch containers:
-```bash
-docker-compose up --build
-```
-
-To run in background mode, use the `-d` flag:
-```bash
-docker-compose up -d
-```
-
-3. Stop containers:
-```bash
-docker-compose down
-```
-
 ### Local Development
 
 1. Clone the repository:
@@ -49,6 +30,25 @@ npm install
 ```bash
 # Development mode with hot reload
 npm run dev
+```
+
+### Docker Deployment
+
+1. Ensure Docker and Docker Compose are installed on your system
+
+2. Build and launch containers:
+```bash
+docker-compose up --build
+```
+
+To run in background mode, use the `-d` flag:
+```bash
+docker-compose up -d
+```
+
+3. Stop containers:
+```bash
+docker-compose down
 ```
 
 The application will be available at: `http://localhost:3000`
