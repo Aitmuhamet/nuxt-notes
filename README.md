@@ -1,7 +1,9 @@
 # Project Name
 
 ## Description
-Brief description of your SPA project built with Nuxt.js.
+
+Note-taking application.
+Each note has a name and a todo list, hereinafter referred to as Todo. Each Todo item consists of a checkbox and a text caption related to it.
 
 ## Requirements
 - Node.js (version 16.x or higher)
