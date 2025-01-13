@@ -72,14 +72,13 @@ npm run start
 ## Project Structure
 ```
 project/
-├── components/       # Vue components
+├── components/      # Vue components
 ├── pages/           # Application pages
 ├── layouts/         # Page layouts
-├── store/           # Vuex store
+├── store/           # Pinia store
 ├── assets/          # Static resources
 ├── plugins/         # Nuxt plugins
 ├── middleware/      # Middleware functions
-├── docker/          # Docker configurations
 ├── docker-compose.yml
 ├── Dockerfile
 ├── nuxt.config.js
