@@ -5,13 +5,32 @@
 Note-taking application.
 Each note has a name and a todo list, hereinafter referred to as Todo. Each Todo item consists of a checkbox and a text caption related to it.
 
-## Requirements
-- Node.js (version 16.x or higher)
-- Docker
-- Docker Compose
-- npm or yarn
-
 ## Installation and Launch
+
+### Docker Deployment
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Aitmuhamet/nuxt-notes.git
+cd nuxt-notes
+```
+
+2. Build and launch containers:
+```bash
+docker-compose up --build
+```
+
+To run in background mode, use the `-d` flag:
+```bash
+docker-compose up -d
+```
+
+3. Stop containers:
+```bash
+docker-compose down
+```
+
+The application will be available at: `http://localhost:3000`
 
 ### Local Development
 
@@ -31,27 +50,6 @@ npm install
 # Development mode with hot reload
 npm run dev
 ```
-
-### Docker Deployment
-
-1. Ensure Docker and Docker Compose are installed on your system
-
-2. Build and launch containers:
-```bash
-docker-compose up --build
-```
-
-To run in background mode, use the `-d` flag:
-```bash
-docker-compose up -d
-```
-
-3. Stop containers:
-```bash
-docker-compose down
-```
-
-The application will be available at: `http://localhost:3000`
 
 ### Additional Development Commands
 
