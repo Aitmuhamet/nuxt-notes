@@ -171,4 +171,4 @@ npm run generate
 This project is licensed under the [MIT License](LICENSE.md) - see the LICENSE.md file for details
 
 ## Support
-For support, please email: support@example.com or create an issue in the repository.
+For support, please email: xa210296@gmail.com or create an issue in the repository.
