@@ -1,4 +1,4 @@
-# Note:Todo
+# The to-do list.
 
 ## Description
 
