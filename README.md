@@ -17,20 +17,22 @@ cd nuxt-notes
 
 2. Build and launch containers:
 ```bash
-docker-compose up --build
+docker-compose up
 ```
+
+The application will be available at: `http://localhost:3000`
 
 To run in background mode, use the `-d` flag:
 ```bash
 docker-compose up -d
 ```
 
+
 3. Stop containers:
 ```bash
 docker-compose down
 ```
 
-The application will be available at: `http://localhost:3000`
 
 ### Local Development
 
