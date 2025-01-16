@@ -33,6 +33,9 @@ const tasks = computed({
     set: (value) => noteStore.currentNote.tasks = value
 });
 
+const createNewTask = () => {
+    noteStore.createNewTask()
+}
 
 </script>
 
@@ -55,6 +58,7 @@ const tasks = computed({
                     <input
                         type="text"
                         v-model="task.text"
+                        placeholder="New Task"
                         :class="{ 'completed': task.isCompleted }"
                         :id="'text-' + task.id"
                         class="task__text my-2 bg-transparent outline-0"
@@ -72,7 +76,7 @@ const tasks = computed({
                 </div>
                 <button
                     type="button"
-                    @click="noteStore.createNewTask()"
+                    @click="createNewTask()"
                     class="btn p-3 my-4"
                 >Create new task</button>
             </form>

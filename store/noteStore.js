@@ -61,10 +61,11 @@
         const createNewTask = () => {
             const newTask = {
                 id: null,
-                text: "New Task",
+                text: "",
                 isCompleted: false,
             };
             currentNote.value.tasks.push(newTask);
+            
         };
 
         const updateTask = (taskId, updatedTask) => {
