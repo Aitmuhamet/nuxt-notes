@@ -83,6 +83,10 @@ console.log('canRedo: ', canRedo.value);
   justify-content: center;
   align-items: center;
 
+  border: 1px solid rgba(var(--primary-color), 0.3);
+  border-radius: .75rem;
+  padding: 1rem 2rem;
+
   &__btn {
     padding: .5rem;
 

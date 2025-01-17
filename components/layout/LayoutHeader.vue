@@ -13,12 +13,12 @@ const isNotePage = computed(() => route.path.includes('/note'));
 const discardChanges = () => {
   console.log('route.path:', route.path);
   console.log('noteStore:', noteStore.currentStep);
-  
+
   if (route.path !== '/' && noteStore.currentStep !== 0) {
     modalStore.openModal('comfirmDiscardChanges');
   } else if (route.path !== '/' && noteStore.currentStep === 0) {
     console.log('router.push');
-    
+
     router.push('/');
   }
 }
@@ -51,7 +51,7 @@ watchEffect(() => {
 const handleKeydown = (event) => {
   if (event.code === 'Enter' && route.path !== '/') {
     saveAndNavigate();
-  } else if (event.code  === 'Space' && route.path === '/') {
+  } else if (event.code === 'Space' && route.path === '/') {
     router.push('/note/[new]')
   } else if (event.code === 'Escape' && route.path !== '/') {
     discardChanges();
@@ -70,11 +70,15 @@ onBeforeUnmount(() => {
 
 <template>
   <header class="header container mx-auto my-4 flex items-center justify-start rounded-xl">
-    <button @click="discardChanges" to="/">
+    <button
+      @click="discardChanges"
+      to="/"
+      class="header__logo-btn"
+    >
       <img
         src="/logo.svg"
         alt="Logo"
-        class="header-logo p-2 h-4"
+        class="header__logo-image p-2 h-4"
       />
     </button>
 
@@ -138,16 +142,25 @@ onBeforeUnmount(() => {
   cursor: pointer;
 }
 
-.header-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 5em;
-  will-change: filter;
-  transition: filter 300ms;
+.header {
+  &__logo-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5em;
+    will-change: filter;
+    transition: filter 300ms;
 
-  @media (min-width: 768px) {
-    height: unset;
+    @media (min-width: 768px) {
+      height: unset;
+    }
+  }
+
+  &__logo-btn:focus-visible
+   {
+    border: 1px solid rgba(var(--primary-color), .4);
+    outline: none;
+    border-radius: .75rem;
   }
 }
 

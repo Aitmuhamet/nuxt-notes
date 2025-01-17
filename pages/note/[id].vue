@@ -13,8 +13,8 @@ const id = ref(route.params.id);
 
 const noteStore = useNoteStore();
 onMounted(() => {
-  noteStore.loadNotesFromLocalStorage(); 
-  prepareNote();
+    noteStore.loadNotesFromLocalStorage();
+    prepareNote();
 })
 
 const prepareNote = () => {
@@ -80,8 +80,7 @@ const createNewTask = () => {
                     class="btn p-3 my-4"
                 >Create new task</button>
             </form>
-    
-            <!-- <pre>notes: {{ noteStore.currentNote }}</pre> -->
+
         </div>
     </ClientOnly>
 </template>
@@ -113,9 +112,18 @@ const createNewTask = () => {
 
     }
 
+    &:focus-within {
+        background: #f9f4ec;
+    }
+
     &__checkbox {
         flex: 0 0 25px;
         margin-right: .25rem;
+
+        &:focus-visible {
+            border: 1px solid rgb(var(--primary-color));
+            outline: none;
+        }
     }
 
     &__text {

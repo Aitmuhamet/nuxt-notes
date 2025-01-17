@@ -1,11 +1,17 @@
 :root {
-    --test-color: rgba(241, 246, 246, 0.142);
-    --primary-color: 115, 115, 115;
+    --test-color: rgba(251, 203, 81, 0.142);
+    --primary-color: 251, 203, 81;
     --secondary-color: #f9f9f9;
     --text-color: #333;
     --bg-color: #f9d07056;
 }
 
+body {
+    ::selection {
+        background: rgba(246, 210, 89, 0.679);
+        color: white;
+      }
+}
 .btn {
     border: none;
     font-size: 14px;
@@ -22,7 +28,8 @@
     }
 }
 @media (hover: hover) {
-    .btn:hover {
+    .btn:hover,
+    .btn:focus {
         transform: scale(1.1);
         background-color: transparent;
         background: var(--bg-color);
@@ -75,7 +82,7 @@
   &:checked::before {
       content: "✔";
       font-size: 16px;
-      color: green;
+      color: rgb(2, 190, 143);
   }
 
 }
