@@ -35,7 +35,7 @@ const first3Tasks = (tasks) => {
       class="notes-container container mx-auto sm:columns-3 lg:columns-3 xl:columns-4 gap-4 h-full hover:cursor-pointer"
     >
       <div
-        class="note overflow-hidden pb-6 hover:scale-[1.03] transition-transform duration-300 ease-in-out relative"
+        class="note pb-6 hover:scale-[1.03] transition-transform duration-300 ease-in-out relative"
         v-for="(note) in noteStore.notes"
         :key="note.id"
         @click="navigateWithReset(note.id)"

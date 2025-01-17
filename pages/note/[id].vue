@@ -7,9 +7,6 @@ definePageMeta({
 
 const route = useRoute();
 const id = ref(route.params.id);
-// console.log('route in Page ID', route);
-// console.log('page id', id.value);
-
 
 const noteStore = useNoteStore();
 onMounted(() => {
@@ -34,7 +31,14 @@ const tasks = computed({
 });
 
 const createNewTask = () => {
-    noteStore.createNewTask()
+    noteStore.createNewTask();
+
+    nextTick(() => {
+        const lastTaskInput = document.querySelector(".task:last-of-type .task__text");
+        if (lastTaskInput) {
+            lastTaskInput.focus();
+        }
+    });
 }
 
 </script>
@@ -77,7 +81,7 @@ const createNewTask = () => {
                 <button
                     type="button"
                     @click="createNewTask()"
-                    class="btn p-3 my-4"
+                    class="btn p-3 my-4 hover:text-amber-500"
                 >Create new task</button>
             </form>
 

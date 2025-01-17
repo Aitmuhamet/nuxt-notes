@@ -90,12 +90,12 @@ onBeforeUnmount(() => {
     <h1
       v-if="!isNotePage"
       class="header__title w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pe-4 cursor-pointer"
-    ><Nuxt-link to="/note/[new]">Todo List</Nuxt-link></h1>
+    ><Nuxt-link to="/note/[new]">New List</Nuxt-link></h1>
     <input
       v-else
       type="text"
       v-model="note.title"
-      placeholder="Todo List Title"
+      placeholder="New List Title"
       ref="labelInput"
       class="header__title bg-transparent w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold focus:outline-none pe-4"
     />
