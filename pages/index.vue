@@ -88,21 +88,22 @@ const first3Tasks = (tasks) => {
   border: 1px solid rgb(var(--primary-color), .5);
   border-radius: 8px;
 
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgb(var(--bg-color), .5);
+
+    .note__title {
+      background-color: rgba(251, 146, 60, .8);
+      color: rgb(31, 30, 30);
+    }
+  }
+  
   &__title {
     transition: background-color .3s, color .3s;
     font-size: 1.5rem;
     font-weight: 600;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
-  }
-
-  &:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    .note__title {
-      background-color: rgb(251 146 60);
-      color: rgb(230, 228, 228);
-    }
   }
 
   .tasks {
