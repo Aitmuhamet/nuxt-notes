@@ -1,10 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
+
   app: {
     baseURL: '/', // вместо router.base
     buildAssetsDir: '/_nuxt/' // добавляем это для правильного пути к ассетам
   },
+
   modules: [
     "@pinia/nuxt",
     "@nuxt/icon",
@@ -29,5 +31,7 @@ export default defineNuxtConfig({
       },
     ],
   ],
+
   css: ["~/assets/scss/main.scss"],
+  compatibilityDate: "2025-01-17",
 });
