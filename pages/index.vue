@@ -40,7 +40,7 @@ const first3Tasks = (tasks) => {
         :key="note.id"
         @click="navigateWithReset(note.id)"
       >
-        <h3 class="note-title p-2 md:p-4 text-slate-600 bg-orange-300 flex justify-between items-center">
+        <h3 class="note__title p-2 md:p-4 text-slate-500  flex justify-between items-center">
           {{ note.title }}
         </h3>
         <ul class="tasks m-2 md:m-4 text-slate-700 flex flex-col items-stretch">
@@ -62,13 +62,13 @@ const first3Tasks = (tasks) => {
           </li>
         </ul>
         <button
-          class="header__btn btn w-8 h-8 p-0.5 absolute bottom-1 right-1 opacity-0"
+          class="btn note__btn w-8 h-8 p-0.5 absolute bottom-1 right-1 opacity-0"
           @click.stop="deleteNote(note)"
           type="button"
         >
           <Icon
             name="solar:trash-bin-minimalistic-2-broken"
-            class="text-sm lg:text-xl hover:text-neutral-900"
+            class="text-sm lg:text-xl hover:text-amber-500"
           />
         </button>
       </div>
@@ -85,18 +85,33 @@ const first3Tasks = (tasks) => {
   break-inside: avoid;
   margin-bottom: 1rem;
   background-color: var(--secondary-color);
-  border: 1px solid #ddd;
+  border: 1px solid rgb(var(--primary-color), .5);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &__title {
+    transition: background-color .3s, color .3s;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .note__title {
+      background-color: rgb(251 146 60);
+      color: rgb(230, 228, 228);
+    }
+  }
 
   .tasks {
     &__item {
       display: flex;
       align-items: center;
     }
-    
+
     &__text {
-      overflow: hidden;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
@@ -116,6 +131,8 @@ const first3Tasks = (tasks) => {
       }
     }
   }
+
+
 }
 
 /* Заголовок заметки */
@@ -125,14 +142,14 @@ const first3Tasks = (tasks) => {
 }
 
 .note .btn {
-  transition: opacity .5s, transform .5s;
+  transition: opacity .2s, transform .2s;
 }
 
 .note:hover .btn {
   opacity: 1;
 
   &:hover {
-    transform: scale(1.25)
+    transform: scale(1.5)
   }
 }
 

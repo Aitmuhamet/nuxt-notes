@@ -36,7 +36,7 @@ console.log('canRedo: ', canRedo.value);
     >
       <Icon
         name="solar:double-alt-arrow-left-broken"
-        class="text-4xl md:text-5xl hover:text-neutral-900"
+        class="text-4xl md:text-5xl hover:text-amber-500"
       />
     </button>
     <button
@@ -46,7 +46,7 @@ console.log('canRedo: ', canRedo.value);
     >
       <Icon
         name="solar:double-alt-arrow-right-broken"
-        class="text-4xl md:text-5xl hover:text-neutral-900"
+        class="text-4xl md:text-5xl hover:text-amber-500"
       />
     </button>
     <button
@@ -56,7 +56,7 @@ console.log('canRedo: ', canRedo.value);
     >
       <Icon
         name="solar:trash-bin-minimalistic-2-broken"
-        class="text-4xl md:text-5xl  hover:text-neutral-900"
+        class="text-4xl md:text-5xl  hover:text-amber-500"
       />
     </button>
     <button
@@ -66,7 +66,7 @@ console.log('canRedo: ', canRedo.value);
     >
       <Icon
         name="solar:close-circle-broken"
-        class="text-red-500 text-4xl md:text-5xl "
+        class="text-red-500 text-4xl md:text-5xl hover:text-amber-500"
       />
     </button>
   </div>

@@ -1,9 +1,11 @@
 :root {
-    --test-color: rgba(251, 203, 81, 0.142);
-    --primary-color: 251, 203, 81;
+    --test-color: rgb(135, 235, 220);
+    --primary-color: 135, 235, 220;
     --secondary-color: #f9f9f9;
     --text-color: #333;
     --bg-color: #f9d07056;
+
+    --tost-bg-color: var(--primary-color)
 }
 
 body {
@@ -16,6 +18,7 @@ body {
     border: none;
     font-size: 14px;
     border-radius: 10px;
+    border: 1px solid var(--bg-color);
     cursor: pointer;
     transition: background-color 300ms, transform 100ms, box-shadow 300ms;
     display: flex;

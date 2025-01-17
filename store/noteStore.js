@@ -66,6 +66,11 @@
                 isCompleted: false,
             };
             currentNote.value.tasks.push(newTask);
+            currentNote.value.tasks.forEach((todo, index) => {
+                console.log('currentNoteTasks: ', todo);
+                
+                todo.id = generateTaskId(currentNote.value.id, index);
+            });
             
         };
 
@@ -108,9 +113,9 @@
                 );
             } else {
                 currentNote.value.id = generateNoteId();
-                currentNote.value.tasks.forEach((todo, index) => {
-                    todo.id = generateTaskId(currentNote.value.id, index);
-                });
+                // currentNote.value.tasks.forEach((todo, index) => {
+                //     todo.id = generateTaskId(currentNote.value.id, index);
+                // });
                 notesData.value.push(currentNote.value);
             }
 
@@ -124,6 +129,9 @@
                 : 1;
         };
         const generateTaskId = (noteId, index) => {
+            console.log('NoteId', noteId);
+            console.log('index', index);
+            
             return `${noteId}_${index + 1}`;
         };
 

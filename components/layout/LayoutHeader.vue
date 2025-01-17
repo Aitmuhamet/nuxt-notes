@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useToast } from 'vue-toastification';
 import { ref, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import { useNoteStore } from '~/store/noteStore';
 const noteStore = useNoteStore();
@@ -29,11 +30,15 @@ const isNoteTitleEmpty = () => {
   return noteStore.currentNote.title.length === 0;
 }
 
+
+const toast = useToast();
 const saveAndNavigate = () => {
   if (!isNoteTitleEmpty()) {
     noteStore.saveNote();
     noteStore.resetHistory();
     router.push('/');
+  } else {
+    toast.warning('Title is empry')
   }
 }
 
@@ -85,12 +90,12 @@ onBeforeUnmount(() => {
     <h1
       v-if="!isNotePage"
       class="header__title w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pe-4 cursor-pointer"
-    ><Nuxt-link to="/note/[new]">My Note</Nuxt-link></h1>
+    ><Nuxt-link to="/note/[new]">Todo List</Nuxt-link></h1>
     <input
       v-else
       type="text"
       v-model="note.title"
-      placeholder="My Note"
+      placeholder="Todo List Title"
       ref="labelInput"
       class="header__title bg-transparent w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold focus:outline-none pe-4"
     />
@@ -104,7 +109,7 @@ onBeforeUnmount(() => {
       >
         <Icon
           name="solar:archive-check-broken"
-          class="text-amber-300 text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
+          class=" text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
         />
       </button>
       <Nuxt-Link
