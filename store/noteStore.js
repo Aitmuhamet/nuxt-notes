@@ -1,6 +1,7 @@
     import { defineStore } from "pinia";
     import { useLocalStorageStore } from "./localStorageStore";
     import { ref, watch, toRaw } from "vue";
+    import { useToast } from "vue-toastification";
 
     export const useNoteStore = defineStore("notes", () => {
         const notesData = ref([
@@ -80,9 +81,12 @@
             }
         };
 
+        const toast = useToast();
+
         const deleteNote = (noteId) => {
             notesData.value = notesData.value.filter((note) => note.id !== noteId);
             saveNotesToLocalStorage();
+            toast.success('Deleted')
         };
 
         const deleteTask = (taskId) => {
@@ -111,6 +115,7 @@
             }
 
             saveNotesToLocalStorage();
+            toast.success('Saved')
         };
 
         const generateNoteId = () => {

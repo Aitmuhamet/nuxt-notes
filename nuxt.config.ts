@@ -34,4 +34,8 @@ export default defineNuxtConfig({
 
   css: ["~/assets/scss/main.scss"],
   compatibilityDate: "2025-01-17",
+  build:{
+    // vue-toastification - old commonjs module 
+    transpile: ['vue-toastification'],
+  }
 });
