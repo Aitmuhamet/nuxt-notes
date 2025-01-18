@@ -4,7 +4,8 @@ export default defineNuxtConfig({
 
   app: {
     baseURL: '/', // вместо router.base
-    buildAssetsDir: '/_nuxt/' // добавляем это для правильного пути к ассетам
+    buildAssetsDir: '/_nuxt/', // добавляем это для правильного пути к ассетам
+    layoutTransition: { name: 'layout', mode: 'out-in' }
   },
 
   modules: [

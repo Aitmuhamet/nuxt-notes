@@ -3,6 +3,12 @@ import { computed } from 'vue';
 import { useNoteStore } from '~/store/noteStore';
 const noteStore = useNoteStore();
 
+definePageMeta({
+  pageTransition: {
+    name: 'rotate'
+  }
+})
+
 onMounted(() => {
   noteStore.loadNotesFromLocalStorage();
 })
