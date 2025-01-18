@@ -109,7 +109,7 @@ onBeforeUnmount(() => {
       >
         <Icon
           name="solar:archive-check-broken"
-          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-green-300"
+          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-green-500"
         />
       </button>
       <Nuxt-Link
@@ -119,7 +119,7 @@ onBeforeUnmount(() => {
       >
         <Icon
           name="solar:traffic-economy-line-duotone"
-          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-green-300"
+          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-green-500"
         />
       </Nuxt-Link>
     </div>
