@@ -120,9 +120,11 @@ const first3Tasks = (tasks) => {
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
       line-clamp: 1;
+      overflow: hidden;
       text-overflow: ellipsis;
+      white-space: normal;
     }
-
+    
     &__checkbox {
       width: 15px;
       height: 15px;
