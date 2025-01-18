@@ -65,6 +65,9 @@ const handleKeydown = (event) => {
 
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
+  if (labelInput.value) {
+    labelInput.value.focus()
+  }
 })
 
 onBeforeUnmount(() => {

@@ -5,7 +5,15 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/', // вместо router.base
     buildAssetsDir: '/_nuxt/', // добавляем это для правильного пути к ассетам
-    layoutTransition: { name: 'layout', mode: 'out-in' }
+    layoutTransition: { name: 'layout', mode: 'out-in' },
+    head: {
+      title: 'Todo-list', // Название страницы по умолчанию
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: 'Описание вашего сайта' }
+      ],
+    },
   },
 
   modules: [
