@@ -1,0 +1,131 @@
+:root {
+    --test-color: rgb(250, 150, 27);
+    --primary-color: 250, 150, 27;
+    --secondary-color: #f9f9f9;
+    --text-color: #333;
+    --bg-color: #f9d07056;
+
+    --tost-bg-color: var(--primary-color);
+}
+
+body {
+    ::selection {
+        background: rgba(245, 228, 196, 0.932);
+        color: rgb(46, 46, 46);
+    }
+    overflow-y: scroll;
+}
+.btn {
+    border: none;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--bg-color);
+    cursor: pointer;
+    transition: background-color 300ms, transform 100ms, box-shadow 300ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s, transform 0.2s;
+
+    @media (min-width: 768px) {
+        transition: opacity 0.3s, transform 0.3s;
+    }
+}
+@media (hover: hover) {
+    .btn:hover,
+    .btn:focus {
+        transform: scale(1.1);
+        background-color: transparent;
+        background: var(--bg-color);
+        // opacity: 0.7;
+    }
+}
+@media (hover: none) {
+    .btn:active {
+        transform: scale(1);
+        background-color: rgba(var(--primary-color), 0.1);
+    }
+}
+.btn:focus {
+    outline: none;
+}
+.btn:disabled {
+    color: rgb(var(--primary-color));
+
+    transform: scale(1);
+    opacity: 0.1;
+}
+
+.btn_green {
+    background: #37df5c;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.checkbox {
+    flex: 0 0 25px;
+    margin-right: 0.5rem;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:checked::before {
+        content: "✔";
+        font-size: 16px;
+        color: rgb(2, 190, 143);
+    }
+}
+
+/* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #F3AF00 #DFE9EB;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 15px;
+}
+*::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #dfe9eb;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: #e7f4f7;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #e7f4f7;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #f3af00;
+    border: 3px solid #dfe9eb;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #ff9600;
+    border: 3px solid #e7f4f7;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #ff7903;
+    border: 3px solid #e7f4f7;
+}

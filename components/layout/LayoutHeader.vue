@@ -128,9 +128,16 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .header {
-  border: 1px solid rgba(var(--primary-color), .3);
   font-family: 'Raleway', sans-serif;
   height: auto;
+  position: sticky;
+  top: 1rem;
+  z-index: 99;
+  background-color: var(--secondary-color);
+  border: 1px solid rgba(var(--primary-color), 1);
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
 .btn {

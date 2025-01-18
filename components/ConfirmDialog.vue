@@ -39,29 +39,29 @@ const closeModal = modalStore.closeModal;
         >
             <div class="modal-content">
                 <div v-if="modalType === 'confirmDelete'">
-                    <p class="text-center text-2xl mt-2">Delete note: <span class="p-1 bg-lime-100 rounded">{{ modalData.title
+                    <p class="text-center text-4xl mt-2">Delete note: <span class="p-1 bg-lime-100 rounded">{{ modalData.title
                             }}</span> ?</p>
                     <div class="flex justify-center mt-6">
                         <button
                             @click="confirmDelete(modalData.id)"
-                            class="btn p-3 mx-3 w-20 "
+                            class="btn text-lg p-3 mx-3 w-20 "
                         >Yes</button>
                         <button
                             @click="closeModal"
-                            class="btn p-3 mx-3 w-20 "
+                            class="btn text-lg p-3 mx-3 w-20 "
                         >No</button>
                     </div>
                 </div>
                 <div v-else-if="modalType === 'comfirmDiscardChanges'">
-                    <p class="text-center mt-2 text-2xl">Cancel changes?</p>
+                    <p class="text-center mt-2 text-4xl">Cancel changes?</p>
                     <div class="flex justify-center mt-6">
                         <button
                             @click="confirmDiscardChanges"
-                            class="btn p-3 m-3 w-20 "
+                            class="btn text-lg p-3 m-3 w-20 "
                         >Yes</button>
                         <button
                             @click="closeModal"
-                            class="btn p-3 m-3 w-20 "
+                            class="btn text-lg p-3 m-3 w-20 "
                         >No</button>
                     </div>
                 </div>
@@ -79,6 +79,7 @@ const closeModal = modalStore.closeModal;
     left: 0;
     width: 100vw;
     height: 100dvh;
+    z-index: 299;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -76,7 +76,7 @@ const createNewTask = () => {
                     >
                         <Icon
                             name="solar:trash-bin-minimalistic-2-broken"
-                            class="text-lg"
+                            class="text-lg text-amber-500 hover:text-red-500"
                         />
                     </button>
                 </div>

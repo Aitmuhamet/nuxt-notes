@@ -43,7 +43,7 @@ const first3Tasks = (tasks) => {
         <h3 class="note__title p-2 md:p-4 text-slate-500  flex justify-between items-center">
           {{ note.title }}
         </h3>
-        <ul class="tasks m-2 md:m-4 text-slate-700 flex flex-col items-stretch">
+        <ul class="tasks m-2 md:m-4 text-slate-200 flex flex-col items-stretch">
           <li
             v-for="(task) in first3Tasks(note.tasks)"
             :key="task.id"
@@ -88,15 +88,22 @@ const first3Tasks = (tasks) => {
   break-inside: avoid;
   margin-bottom: 1rem;
   background-color: var(--secondary-color);
-  border: 1px solid rgb(var(--primary-color), .5);
+  border: 1px solid rgba(var(--primary-color), 1);
   border-radius: 8px;
 
   &:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     border: 1px solid rgb(var(--bg-color), .5);
+    z-index: 49;
 
     .note__title {
       background-color: rgba(251, 146, 60, .8);
+      color: rgb(31, 30, 30);
+    }
+
+    .tasks__text {
       color: rgb(31, 30, 30);
     }
   }
@@ -124,7 +131,7 @@ const first3Tasks = (tasks) => {
       text-overflow: ellipsis;
       white-space: normal;
     }
-    
+
     &__checkbox {
       width: 15px;
       height: 15px;
@@ -200,7 +207,7 @@ const first3Tasks = (tasks) => {
   .notes-container {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .note {
     min-height: 215px;
   }
