@@ -30,23 +30,23 @@ console.log('canRedo: ', canRedo.value);
   <div class="bottom-controls text-neutral-500 flex gap-6
     ">
     <button
-      class="btn bottom-controls__btn"
+      class="btn bottom-controls__btn hover:text-stone-500"
       @click="noteStore.undo()"
       :disabled="!canUndo"
     >
       <Icon
         name="solar:double-alt-arrow-left-broken"
-        class="text-4xl md:text-5xl hover:text-amber-500"
+        class="text-4xl md:text-5xl text-amber-500 hover:text-stone-500"
       />
     </button>
     <button
-      class="btn bottom-controls__btn"
+      class="btn bottom-controls__btn hover:text-stone-500"
       @click="noteStore.redo()"
       :disabled="!canRedo"
     >
       <Icon
         name="solar:double-alt-arrow-right-broken"
-        class="text-4xl md:text-5xl hover:text-amber-500"
+        class="text-4xl md:text-5xl text-amber-500 hover:text-stone-500"
       />
     </button>
     <button
@@ -56,7 +56,7 @@ console.log('canRedo: ', canRedo.value);
     >
       <Icon
         name="solar:trash-bin-minimalistic-2-broken"
-        class="text-4xl md:text-5xl  hover:text-amber-500"
+        class="text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
       />
     </button>
     <button
@@ -66,7 +66,7 @@ console.log('canRedo: ', canRedo.value);
     >
       <Icon
         name="solar:close-circle-broken"
-        class="text-red-500 text-4xl md:text-5xl hover:text-amber-500"
+        class="text-4xl md:text-5xl text-amber-500 hover:text-red-500 "
       />
     </button>
   </div>

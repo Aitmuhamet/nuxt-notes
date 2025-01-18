@@ -80,7 +80,10 @@ const first3Tasks = (tasks) => {
 </template>
 
 <style lang="scss" scoped>
-/* Стили для каждой заметки */
+.notes-container {
+  display: grid;
+}
+
 .note {
   break-inside: avoid;
   margin-bottom: 1rem;
@@ -97,7 +100,7 @@ const first3Tasks = (tasks) => {
       color: rgb(31, 30, 30);
     }
   }
-  
+
   &__title {
     transition: background-color .3s, color .3s;
     font-size: 1.5rem;
@@ -171,5 +174,45 @@ const first3Tasks = (tasks) => {
 .tasks li:last-child {
   margin-bottom: 0;
   /* Убираем отступ для последнего элемента */
+}
+
+@media (min-width: 640px) {
+  .notes-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: .75rem 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .notes-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: .75rem 1.5rem;
+  }
+
+  .note {
+    min-height: 215px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .notes-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .note {
+    min-height: 215px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .notes-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1736px) {
+  .notes-container {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 </style>

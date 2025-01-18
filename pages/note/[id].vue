@@ -53,20 +53,22 @@ const createNewTask = () => {
                     :key="task.id"
                     class="task"
                 >
-                    <input
-                        type="checkbox"
-                        :id="'task-' + task.id"
-                        v-model="task.isCompleted"
-                        class="checkbox task__checkbox"
-                    />
-                    <input
-                        type="text"
-                        v-model="task.text"
-                        placeholder="New Task"
-                        :class="{ 'completed': task.isCompleted }"
-                        :id="'text-' + task.id"
-                        class="task__text my-2 bg-transparent outline-0"
-                    />
+                    <div class="task__content">
+                        <input
+                            type="checkbox"
+                            :id="'task-' + task.id"
+                            v-model="task.isCompleted"
+                            class="checkbox task__checkbox"
+                        />
+                        <input
+                            type="text"
+                            v-model="task.text"
+                            placeholder="New Task"
+                            :class="{ 'completed': task.isCompleted }"
+                            :id="'text-' + task.id"
+                            class="task__text my-2 bg-transparent outline-0"
+                        />
+                    </div>
                     <button
                         type="button"
                         class="btn task__btn self-center p-3 opacity-0 ms-auto"
@@ -99,15 +101,12 @@ const createNewTask = () => {
 
 .task {
     display: flex;
-    align-items: center;
     gap: 10px;
-    border-radius: 8px;
-    padding: 0 .5rem;
-    transition: background .3s, color .3s;
-
     &:hover {
-        background: #f9f4ec;
-        color: rgb(249, 153, 8);
+        .task__content {
+            background: #f9f4ec;
+            color: rgb(249, 153, 8);
+        }
 
         .btn {
             opacity: 1;
@@ -115,10 +114,23 @@ const createNewTask = () => {
         }
 
     }
-
     &:focus-within {
-        background: #f9f4ec;
+        .task__content {
+            background: #f9f4ec;
+        }
     }
+
+    &__content {
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 .5rem;
+        transition: background .3s, color .3s;
+        border-radius: 8px;
+        
+    }
+    
 
     &__checkbox {
         flex: 0 0 25px;
@@ -139,7 +151,7 @@ const createNewTask = () => {
         }
     }
 
-    &task__btn {
+    .task__btn {
         flex: 0 0 10px;
     }
 

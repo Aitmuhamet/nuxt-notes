@@ -109,17 +109,17 @@ onBeforeUnmount(() => {
       >
         <Icon
           name="solar:archive-check-broken"
-          class=" text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
+          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-green-300"
         />
       </button>
       <Nuxt-Link
         to="/note/[new]"
-        class="btn header__btn hover:text-amber-500"
+        class="btn header__btn"
         v-else
       >
         <Icon
           name="solar:traffic-economy-line-duotone"
-          class=" text-3xl sm:text-4xl md:text-5xl hover:text-amber-500"
+          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-green-300"
         />
       </Nuxt-Link>
     </div>
@@ -141,10 +141,13 @@ onBeforeUnmount(() => {
   background-color: transparent;
   border: none;
   border-radius: 5px;
-  color: rgba(var(--primary-color), .8);
   font-size: 3rem;
   font-weight: 700;
   cursor: pointer;
+
+  &:hover {
+    color: rgba(var(--primary-color), .8);
+  }
 }
 
 .header {
@@ -161,8 +164,7 @@ onBeforeUnmount(() => {
     }
   }
 
-  &__logo-btn:focus-visible
-   {
+  &__logo-btn:focus-visible {
     border: 1px solid rgba(var(--primary-color), .4);
     outline: none;
     border-radius: .75rem;
