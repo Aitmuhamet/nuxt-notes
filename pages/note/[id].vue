@@ -3,8 +3,8 @@ import { useNoteStore } from "~/store/noteStore";
 
 definePageMeta({
     layout: "note",
-});
-
+    name: 'Note',
+})
 const route = useRoute();
 const id = ref(route.params.id);
 
@@ -40,6 +40,17 @@ const createNewTask = () => {
         }
     });
 }
+
+useHead({
+  title: `Note: ${noteStore.currentNote.title}`,
+  meta: [
+    { name: 'description', content: 'My amazing site.' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+  script: [ { innerHTML: 'console.log(\'Hello world\')' } ]
+})
 
 </script>
 
@@ -102,6 +113,7 @@ const createNewTask = () => {
 .task {
     display: flex;
     gap: 10px;
+
     &:hover {
         .task__content {
             background: #f9f4ec;
@@ -114,6 +126,7 @@ const createNewTask = () => {
         }
 
     }
+
     &:focus-within {
         .task__content {
             background: #f9f4ec;
@@ -128,9 +141,9 @@ const createNewTask = () => {
         padding: 0 .5rem;
         transition: background .3s, color .3s;
         border-radius: 8px;
-        
+
     }
-    
+
 
     &__checkbox {
         flex: 0 0 25px;
