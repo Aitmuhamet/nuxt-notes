@@ -98,6 +98,6 @@ const closeModal = modalStore.closeModal;
     border: 1px solid rgba(var(--primary-color), 1);
     background: white;
     padding: 50px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 </style>

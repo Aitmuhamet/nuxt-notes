@@ -19,13 +19,13 @@ const prepareNote = () => {
     console.group('prepareNote')
     console.log('isValidId:', isValidId);
     console.log('id:', id.value);
-    
-    
+
+
     if (isValidId) {
         noteStore.resetHistory();
         noteStore.prepareNoteForEditing(Number(id.value));
         console.log('prepareNoteForEditign');
-        
+
     } else {
         noteStore.createNewNote();
         console.log('id is NaN: createNewNote');
@@ -55,23 +55,23 @@ const createNewTask = () => {
 }
 
 useHead({
-  title: `Note: ${noteTitle.value || 'Untitled'}`,
-  meta: [
-    { name: 'description', content: 'My amazing site.' }
-  ],
-  bodyAttrs: {
-    class: 'test'
-  },
-  script: [ { innerHTML: 'console.log(\'Hello world\')' } ]
+    title: `Note: ${noteTitle.value || 'Untitled'}`,
+    meta: [
+        { name: 'description', content: 'My amazing site.' }
+    ],
+    bodyAttrs: {
+        class: 'test'
+    },
+    script: [{ innerHTML: 'console.log(\'Hello world\')' }]
 })
 
 watchEffect(() => {
     useHead({
-    title: `Note: ${noteTitle.value || 'Untitled'}`, // Подставляем "Untitled", если title еще не загружен
-    meta: [
-      { name: 'description', content: 'My amazing site.' }
-    ]
-  });
+        title: `Note: ${noteTitle.value || 'Untitled'}`, // Подставляем "Untitled", если title еще не загружен
+        meta: [
+            { name: 'description', content: 'My amazing site.' }
+        ]
+    });
 })
 </script>
 
@@ -135,6 +135,14 @@ watchEffect(() => {
     display: flex;
     gap: 10px;
 
+    * {
+        transition: scale .3s, filter .3s;
+    }
+    &:has(:hover) :not(:hover) {
+        scale: 0.95;
+        filter: blur(2px);
+    }
+
     &:hover {
         .task__content {
             background: #f9f4ec;
@@ -172,7 +180,6 @@ watchEffect(() => {
 
         &:focus-visible {
             border: 1px solid rgb(var(--primary-color));
-            outline: none;
         }
     }
 
@@ -183,12 +190,19 @@ watchEffect(() => {
         @media (min-width: 640px) {
             font-size: 20px;
         }
+
     }
 
-    .task__btn {
+    &__btn {
         flex: 0 0 10px;
-    }
 
+        &:focus {
+            opacity: 1;
+            transform: scale(1.4);
+            outline: none;
+            background-color: transparent;
+        }
+    }
 
 }
 </style>

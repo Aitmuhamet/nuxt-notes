@@ -7,7 +7,7 @@
         const notesData = ref([
             {
                 id: 1,
-                title: "Note #1",
+                title: "List #1",
                 tasks: [
                     {
                         id: 101,

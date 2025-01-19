@@ -92,13 +92,13 @@ onBeforeUnmount(() => {
 
     <h1
       v-if="!isNotePage"
-      class="header__title w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pe-4 cursor-pointer"
+      class="header__title header__title--button w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pe-4 cursor-pointer"
     ><Nuxt-link to="/note/[new]">New List</Nuxt-link></h1>
     <input
       v-else
       type="text"
       v-model="note.title"
-      placeholder="New List Title"
+      placeholder="New List"
       ref="labelInput"
       class="header__title bg-transparent w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold focus:outline-none pe-4"
     />
@@ -178,6 +178,13 @@ onBeforeUnmount(() => {
     border: 1px solid rgba(var(--primary-color), .4);
     outline: none;
     border-radius: .75rem;
+  }
+
+  &__title--button {
+    transition: color .2s;
+    &:hover {
+      color: rgb(var(--primary-color));
+    }
   }
 }
 
