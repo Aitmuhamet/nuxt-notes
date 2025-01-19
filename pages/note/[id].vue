@@ -186,6 +186,8 @@ watchEffect(() => {
     &__text {
         font-size: .5em;
         flex: 1 1 auto;
+        align-self: center;
+        height: 100%;
 
         @media (min-width: 640px) {
             font-size: 20px;
