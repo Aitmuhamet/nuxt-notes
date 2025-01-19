@@ -1,13 +1,6 @@
 <script setup>
-import { computed } from 'vue';
 import { useNoteStore } from '~/store/noteStore';
 const noteStore = useNoteStore();
-
-definePageMeta({
-  pageTransition: {
-    name: 'rotate'
-  }
-})
 
 onMounted(() => {
   noteStore.loadNotesFromLocalStorage();
@@ -31,6 +24,13 @@ const deleteNote = (note) => {
 const first3Tasks = (tasks) => {
   return tasks.slice(0, 3);
 }
+
+useHead({
+  title: `Todos`, // Подставляем "Untitled", если title еще не загружен
+  meta: [
+    { name: 'description', content: 'My amazing site.' }
+  ]
+});
 
 </script>
 
