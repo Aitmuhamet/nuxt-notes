@@ -112,7 +112,7 @@ onBeforeUnmount(() => {
       >
         <Icon
           name="solar:archive-check-broken"
-          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-green-500"
+          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
         />
       </button>
       <Nuxt-Link
@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
       >
         <Icon
           name="solar:traffic-economy-line-duotone"
-          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-green-500"
+          class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
         />
       </Nuxt-Link>
     </div>
@@ -141,6 +141,14 @@ onBeforeUnmount(() => {
   -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+  * {
+    transition: scale .3s, filter .3s;
+  }
+  &:has(:hover) :not(:hover) {
+    scale: 0.98;
+    filter: blur(2px);
+  }
 }
 
 .btn {
