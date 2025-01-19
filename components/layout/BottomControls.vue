@@ -55,6 +55,7 @@ console.log('canRedo: ', canRedo.value);
       class="btn bottom-controls__btn"
       type="button"
       @click="deleteNote(note)"
+      aria-label="Delete Note"
     >
       <Icon
         name="solar:trash-bin-minimalistic-2-broken"
@@ -65,6 +66,7 @@ console.log('canRedo: ', canRedo.value);
       type="button"
       class="btn bottom-controls__btn"
       @click="discardChanges()"
+      aria-label="Cancel Changes"
     >
       <Icon
         name="solar:close-circle-broken"

@@ -109,6 +109,7 @@ onBeforeUnmount(() => {
         class="btn header__btn"
         v-if="isNotePage"
         @click="saveAndNavigate()"
+        aria-label="Save and Navigate To Main Page"
       >
         <Icon
           name="solar:archive-check-broken"

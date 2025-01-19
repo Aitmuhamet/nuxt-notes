@@ -105,6 +105,7 @@ watchEffect(() => {
                         type="button"
                         class="btn task__btn self-center p-3 opacity-0 ms-auto"
                         @click="noteStore.deleteTask(task.id)"
+                        aria-label="Delete Task"
                     >
                         <Icon
                             name="solar:trash-bin-minimalistic-2-broken"
@@ -116,6 +117,7 @@ watchEffect(() => {
                     type="button"
                     @click="createNewTask()"
                     class="btn p-3 my-4 hover:text-amber-500"
+                    aria-label="Create New Task"
                 >Create new task</button>
             </form>
 

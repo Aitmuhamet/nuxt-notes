@@ -71,6 +71,7 @@ useHead({
           class="btn note__btn w-8 h-8 p-0.5 absolute bottom-1 right-1 opacity-0"
           @click.stop="deleteNote(note)"
           type="button"
+          aria-label="Delete Note"
         >
           <Icon
             name="solar:trash-bin-minimalistic-2-broken"
