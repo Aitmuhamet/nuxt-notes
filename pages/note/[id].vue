@@ -9,21 +9,34 @@ const route = useRoute();
 const id = ref(route.params.id);
 
 const noteStore = useNoteStore();
-onMounted(() => {
-    noteStore.loadNotesFromLocalStorage();
+onMounted(async () => {
+    await noteStore.loadNotesFromLocalStorage();
     prepareNote();
 })
 
 const prepareNote = () => {
     const isValidId = !isNaN(Number(id.value));
+    console.group('prepareNote')
+    console.log('isValidId:', isValidId);
+    console.log('id:', id.value);
+    
+    
     if (isValidId) {
         noteStore.resetHistory();
         noteStore.prepareNoteForEditing(Number(id.value));
+        console.log('prepareNoteForEditign');
+        
     } else {
         noteStore.createNewNote();
-        console.log('currentNote:', noteStore.currentNote);
+        console.log('id is NaN: createNewNote');
     }
+    console.log('currentNote:', noteStore.currentNote);
+    console.groupEnd();
 }
+
+const noteTitle = computed({
+    get: () => noteStore.currentNote.title
+});
 
 const tasks = computed({
     get: () => noteStore.currentNote.tasks,
@@ -42,7 +55,7 @@ const createNewTask = () => {
 }
 
 useHead({
-  title: `Note: ${noteStore.currentNote.title}`,
+  title: `Note: ${noteTitle.value || 'Untitled'}`,
   meta: [
     { name: 'description', content: 'My amazing site.' }
   ],
@@ -52,6 +65,14 @@ useHead({
   script: [ { innerHTML: 'console.log(\'Hello world\')' } ]
 })
 
+watchEffect(() => {
+    useHead({
+    title: `Note: ${noteTitle.value || 'Untitled'}`, // Подставляем "Untitled", если title еще не загружен
+    meta: [
+      { name: 'description', content: 'My amazing site.' }
+    ]
+  });
+})
 </script>
 
 <template>

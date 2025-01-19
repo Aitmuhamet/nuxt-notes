@@ -1,7 +1,9 @@
 <script setup>
 import { useNoteStore } from '~/store/noteStore';
 const noteStore = useNoteStore();
-const note = noteStore.currentNote;
+const note = computed({
+  get: () => noteStore.currentNote
+});
 
 import { useModalStore } from '~/store/modalStore';
 import ConfirmDialog from '../ConfirmDialog.vue';
