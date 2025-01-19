@@ -45,6 +45,7 @@ useHead({
         v-for="(note) in noteStore.notes"
         :key="note.id"
         @click="navigateWithReset(note.id)"
+        tabindex="0"
       >
         <h3 class="note__title p-2 md:p-4 text-slate-500  flex justify-between items-center">
           {{ note.title }}
@@ -98,12 +99,15 @@ useHead({
   border: 1px solid rgba(var(--primary-color), 1);
   border-radius: 8px;
 
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     border: 1px solid rgb(var(--bg-color), .5);
     z-index: 49;
+    outline: none;
 
     .note__title {
       background-color: rgba(251, 146, 60, .8);

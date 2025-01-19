@@ -43,17 +43,17 @@ const closeModal = modalStore.closeModal;
                     class="flex flex-col"
                 >
                     <p class="text-center text-4xl mt-2">Delete note?</p>
-                    <p class="p-1 mt-4 bg-lime-100 rounded self-start">
+                    <p class="p-1 mt-4 bg-lime-100 rounded self-center">
                         {{ modalData.title }}
                     </p>
                     <div class="flex justify-center mt-6">
                         <button
                             @click="confirmDelete(modalData.id)"
-                            class="btn text-lg p-3 mx-3 w-20 "
+                            class="btn text-lg mx-3 w-20 "
                         >Yes</button>
                         <button
                             @click="closeModal"
-                            class="btn text-lg p-3 mx-3 w-20 "
+                            class="btn text-lg mx-3 w-20 "
                         >No</button>
                     </div>
                 </div>
@@ -62,11 +62,11 @@ const closeModal = modalStore.closeModal;
                     <div class="flex justify-center mt-6">
                         <button
                             @click="confirmDiscardChanges"
-                            class="btn text-lg p-3 m-3 w-20 "
+                            class="btn text-lg m-3 w-20 "
                         >Yes</button>
                         <button
                             @click="closeModal"
-                            class="btn text-lg p-3 m-3 w-20 "
+                            class="btn text-lg m-3 w-20 "
                         >No</button>
                     </div>
                 </div>
@@ -97,7 +97,11 @@ const closeModal = modalStore.closeModal;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     border: 1px solid rgba(var(--primary-color), 1);
     background: white;
-    padding: 50px;
+    padding: 50px 100px;
     border-radius: 10px;
+}
+
+.btn {
+    padding: 0.75rem 3.5rem;
 }
 </style>

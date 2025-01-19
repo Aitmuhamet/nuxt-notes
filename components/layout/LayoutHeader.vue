@@ -92,8 +92,8 @@ onBeforeUnmount(() => {
 
     <h1
       v-if="!isNotePage"
-      class="header__title header__title--button w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pe-4 cursor-pointer"
-    ><Nuxt-link to="/note/[new]">New List</Nuxt-link></h1>
+      class="header__title w-44 flex-[1_0_auto] text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold pe-4 cursor-pointer"
+    ><Nuxt-link class="header__title-link" to="/note/[new]">New List</Nuxt-link></h1>
     <input
       v-else
       type="text"
@@ -112,7 +112,7 @@ onBeforeUnmount(() => {
         aria-label="Save and Navigate To Main Page"
       >
         <Icon
-          name="solar:archive-check-broken"
+          name="solar:user-rounded-bold-duotone"
           class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
         />
       </button>
@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
         v-else
       >
         <Icon
-          name="solar:traffic-economy-line-duotone"
+          name="solar:user-rounded-broken"
           class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
         />
       </Nuxt-Link>
@@ -146,6 +146,7 @@ onBeforeUnmount(() => {
   * {
     transition: scale .3s, filter .3s;
   }
+
   &:has(:hover) :not(:hover) {
     scale: 0.98;
     filter: blur(2px);
@@ -189,8 +190,11 @@ onBeforeUnmount(() => {
     border-radius: .75rem;
   }
 
-  &__title--button {
+  &__title-link {
+    display: flex;
+    outline: none;
     transition: color .2s;
+
     &:hover {
       color: rgb(var(--primary-color));
     }
