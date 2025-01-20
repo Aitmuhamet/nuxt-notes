@@ -4,6 +4,10 @@
     import { useToast } from "vue-toastification";
 
     export const useNoteStore = defineStore("notes", () => {
+        // 1. Инициализация зависимостей
+        const localStorageStore = useLocalStorageStore();
+        
+        // 2. Реактивные переменные
         const notesData = ref([
             {
                 id: 1,
@@ -17,9 +21,13 @@
                 ],
             },
         ]);
+        const currentNote = ref({});
+        const toast = useToast();
+        const currentStep = ref(-1);
+        const history = ref([]);
 
-        const localStorageStore = useLocalStorageStore();
-
+        // 3. Вычисляемые свойства
+        // 4. Методы
         const loadNotesFromLocalStorage = () => {
             const storedNotes = localStorageStore.getFromLocalStorage("notes");
             console.log('storedNotes: ', storedNotes);
@@ -40,7 +48,6 @@
             localStorageStore.saveToLocalStorage("notes", notesData.value);
         };
 
-        const currentNote = ref({});
         const prepareNoteForEditing = (noteId) => {
             if (noteId) {
                 const note = notesData.value.find((note) => note.id === noteId);
@@ -86,7 +93,6 @@
             }
         };
 
-        const toast = useToast();
 
         const deleteNote = (noteId) => {
             notesData.value = notesData.value.filter((note) => note.id !== noteId);
@@ -113,9 +119,6 @@
                 );
             } else {
                 currentNote.value.id = generateNoteId();
-                // currentNote.value.tasks.forEach((todo, index) => {
-                //     todo.id = generateTaskId(currentNote.value.id, index);
-                // });
                 notesData.value.push(currentNote.value);
             }
 
@@ -135,23 +138,8 @@
             return `${noteId}_${index + 1}`;
         };
 
-        const currentStep = ref(-1);
-        const history = ref([]);
-
         const updateNote = (newContent) => {
-            // console.group("Update note:");
-            // console.log("currentNote IN: ", toRaw(currentNote.value));
-            // console.log("history IN: ", toRaw(history.value));
-            // console.log("currentStep IN: ", currentStep.value);
-            
-            // console.group("if");
             if (currentStep.value < history.value.length - 1) {
-                // console.log("(I.) currentStep.value < history.value.length - 1", currentStep.value < history.value.length - 1);
-                
-                // console.log('1. currentNote.value === history.value[currentStep.value + 1]: ', 
-                //     JSON.stringify(currentNote.value) === JSON.stringify(history.value[currentStep.value + 1]));
-                // console.log('currentNote.value: ', JSON.stringify(currentNote.value));
-                // console.log('history.value[currentStep.value + 1]: ', JSON.stringify(history.value[currentStep.value + 1]));
                     
                 if (JSON.stringify(currentNote.value) !== JSON.stringify(history.value[history.value.length - 1])) {
                     history.value = history.value.slice(0, currentStep.value + 1).map((item) => JSON.parse(JSON.stringify(item)));
@@ -159,102 +147,48 @@
                     console.log("currentStep IF: ", currentStep.value);
                     console.log("history IF: ", toRaw(history.value));
                 }
-
-                // console.log('2. currentNote.value === history.value[currentStep.value]: ', 
-                //     JSON.stringify(currentNote.value) === JSON.stringify(history.value[currentStep.value]));
-                // console.log('currentNote.value: ', JSON.stringify(currentNote.value));
-                // console.log('history.value[currentStep.value]: ', JSON.stringify(history.value[currentStep.value]));
-            
             } 
 
-            // console.log("(II.) currentStep.value === history.value.length - 1", currentStep.value !== history.value.length - 1);
-            // console.log('1. currentNote.value !== history.value[history.value.length - 1]: ', 
-                // JSON.stringify(currentNote.value) !== JSON.stringify(history.value[history.value.length - 1]));
-            // console.log('currentNote.value: ', JSON.stringify(currentNote.value));
-            // console.log('history.value[history.value.length - 1]: ', JSON.stringify(history.value[history.value.length - 1]));
-            
             if (JSON.stringify(currentNote.value) !== JSON.stringify(history.value[history.value.length - 1])) {
                 history.value.push(JSON.parse(JSON.stringify(newContent)));
-                // console.log('history.push(newContent)', history.value);
                 currentStep.value++;
-                // console.log('currentStep++', currentStep.value);
-                
             }
-
-            // console.groupEnd();
-            
-            // console.log("currentNote OUT: ", toRaw(currentNote.value));
-            // console.log("history OUT: ", toRaw(history.value));
-            // console.log("currentStep OUT: ", currentStep.value);
-            // console.groupEnd();
-            
         };
 
 
         const undo = () => {
-            // console.group("Undo");
-            // console.log("currentStep IN:", currentStep.value);
-            
             if (currentStep.value > 0) {
                 currentStep.value--;
                 currentNote.value = JSON.parse(JSON.stringify(history.value[currentStep.value]));
             }
-            // console.log("currentStep OUT:", currentStep.value);
-            // console.groupEnd();
         };
 
         const redo = () => {
-            // console.group("Redo:");
-            // console.log("currentStep IN:", currentStep.value);
-            // console.log("currentNote IN:", currentNote.value);
-            
             if (currentStep.value < history.value.length - 1) {
                 currentStep.value++;
                 currentNote.value = history.value[currentStep.value];
             }
-            // console.log("currentStep OUT:", currentStep.value);
-            // console.log("currentNote OUT:", currentNote.value);
-            // console.groupEnd();
         };
 
         const resetHistory = () => {
-            // console.group("Reset History");
-            // console.log("history: IN", toRaw(history.value));
-            // console.log("currentStep: IN", currentStep.value);
-
             history.value = [];
             currentStep.value = -1;
-            // console.log("currentNote: ", toRaw(currentNote.value));
-            // console.log("history: OUT", toRaw(history.value));
-            // console.log("currentStep: OUT", currentStep.value);
-            // console.groupEnd();
         };
 
+        // 5. Сайд-эффекты
+        onMounted(() => {
+            loadNotesFromLocalStorage();
+        });
+        
+        // 6. Дополнительные подписки
         watch(
             currentNote,
             (newNote, oldNote) => {
-                console.group('watch: currentNote IN')
-                console.log("newNote: ", toRaw(newNote));
-                console.log("oldNote: ", toRaw(oldNote));
-                console.log("currentNote: ", toRaw(currentNote.value));
-                console.log("history: ", toRaw(history.value));
-                console.log("currentStep: ", currentStep.value);
-
-                // console.log("JSON.stringify(oldNote) === JSON.stringify(newNote)): ", JSON.stringify(oldNote) === JSON.stringify(newNote));
-                // console.log("JSON.stringify(history.value[currentStep.value]: ", JSON.stringify(history.value[currentStep.value]));
-                // console.log("JSON.stringify(newNote)): ", JSON.stringify(newNote));
-                console.groupEnd();
-
                 if (JSON.stringify(oldNote) === JSON.stringify(newNote)) {
                     // Запускаю updateNote, когда вносятся изменения в Note вручную
                     updateNote(newNote);
                     // Нужно условие, которое проверяет не является ли новое значение currentNote на то, не является оно предыдущим значением currentNote
                 }
-                console.group("watch: currentNote OUT");
-                console.log("currentNote: ", toRaw(currentNote.value));
-                console.log("history: ", toRaw(history.value));
-                console.log("currentStep: ", currentStep.value);
-                console.groupEnd();
             },
             { deep: true }
         );
@@ -274,11 +208,6 @@
             if (newStep) {
                 // console.log('currentStep: ', currentStep.value);
             }
-        });
-
-        onMounted(() => {
-            loadNotesFromLocalStorage();
-            // resetHistory();
         });
 
         return {

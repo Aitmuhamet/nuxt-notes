@@ -1,17 +1,24 @@
 <script setup>
 import { useNoteStore } from '~/store/noteStore';
-const noteStore = useNoteStore();
-
-onMounted(() => {
-  noteStore.loadNotesFromLocalStorage();
-})
-
 import { useModalStore } from '~/store/modalStore';
 import ConfirmDialog from '~/components/ConfirmDialog.vue';
-const modalStore = useModalStore();
 
+// Метаинформация
+useHead({
+  title: `All Lists`, // Подставляем "Untitled", если title еще не загружен
+  meta: [
+    { name: 'description', content: 'All lists in the site.' }
+  ]
+});
+
+// 1. Инициализация зависимостей
+const noteStore = useNoteStore();
+const modalStore = useModalStore();
 const router = useRouter();
 
+// 2. Реактивные переменные
+// 3. Вычисляемые свойства
+// 4. Методы
 const navigateWithReset = (id) => {
   noteStore.resetHistory();
   router.push(`/note/${id}`);
@@ -25,20 +32,19 @@ const first3Tasks = (tasks) => {
   return tasks.slice(0, 3);
 }
 
-useHead({
-  title: `Todos`, // Подставляем "Untitled", если title еще не загружен
-  meta: [
-    { name: 'description', content: 'My amazing site.' }
-  ]
-});
+// 5. Сайд-эффекты
+onMounted(() => {
+  noteStore.loadNotesFromLocalStorage();
+})
 
+// 6. Допольнительные подписки
 </script>
 
 <template>
   <ClientOnly>
     <div
       translate="no"
-      class="notes-container container mx-auto sm:columns-3 lg:columns-3 xl:columns-4 gap-4 h-full hover:cursor-pointer"
+      class="notes-container container mx-auto gap-4 h-full hover:cursor-pointer"
     >
       <div
         class="note pb-6 hover:scale-[1.03] transition-transform duration-300 ease-in-out relative"
@@ -99,6 +105,10 @@ useHead({
   border: 1px solid rgba(var(--primary-color), 1);
   border-radius: 8px;
 
+  height: auto;
+  max-height: 250px; // Устанавливаем предел высоты
+  overflow: hidden;
+
   &:hover,
   &:focus,
   &:active {
@@ -125,6 +135,16 @@ useHead({
     font-weight: 600;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+    padding: .5rem 1rem;
+    max-height: 4rem;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
   }
 
   .tasks {
@@ -173,7 +193,7 @@ useHead({
   opacity: 1;
 
   &:hover {
-    transform: scale(1.5)
+    transform: scale(1.5) translate(-5px, -5px);
   }
 }
 
@@ -198,14 +218,13 @@ useHead({
 
 @media (min-width: 640px) {
   .notes-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: .75rem 3rem;
   }
 }
 
 @media (min-width: 768px) {
   .notes-container {
-    grid-template-columns: repeat(3, 1fr);
     gap: .75rem 1.5rem;
   }
 
@@ -215,24 +234,12 @@ useHead({
 }
 
 @media (min-width: 1024px) {
-  .notes-container {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
   .note {
     min-height: 215px;
   }
 }
 
-@media (min-width: 1280px) {
-  .notes-container {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
+@media (min-width: 1280px) {}
 
-@media (min-width: 1736px) {
-  .notes-container {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
+@media (min-width: 1736px) {}
 </style>

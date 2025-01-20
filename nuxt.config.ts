@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     buildAssetsDir: '/_nuxt/', // добавляем это для правильного пути к ассетам
     layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
-      title: 'Todos', // Название страницы по умолчанию
+      title: 'New List', // Название страницы по умолчанию
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -19,30 +19,39 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    "@pinia/nuxt",
-    "@nuxt/icon",
-    "@nuxtjs/tailwindcss",
-    [
-      "@nuxtjs/google-fonts",
-      {
-        families: {
-          Roboto: true,
-          "Josefin+Sans": true,
-          Lato: [100, 300],
-          Raleway: {
-            wght: [100, 400],
-            ital: [100],
-          },
-          Inter: "200..700",
-          "Crimson Pro": {
-            wght: "200..900",
-            ital: "200..700",
-          },
+  modules: ["@pinia/nuxt", "@nuxt/icon", "@nuxtjs/tailwindcss", [
+    "@nuxtjs/google-fonts",
+    {
+      families: {
+        Roboto: true,
+        "Josefin+Sans": true,
+        Lato: [100, 300],
+        Raleway: {
+          wght: [100, 400],
+          ital: [100],
+        },
+        Inter: "200..700",
+        "Crimson Pro": {
+          wght: "200..900",
+          ital: "200..700",
         },
       },
-    ],
-  ],
+    },
+  ], 'nuxt-vuefire'],
+  vuefire: {
+    auth: {
+      enabled: true,
+      sessionCookie: false,
+    },
+    config: {
+      apiKey: "AIzaSyC_otjaOnP9MyxCx4hUBXZ5Z7iRMk81ux4",
+      authDomain: "nuxt-notes-64f94.firebaseapp.com",
+      projectId: "nuxt-notes-64f94",
+      storageBucket: "nuxt-notes-64f94.firebasestorage.app",
+      messagingSenderId: "457478669304",
+      appId: "1:457478669304:web:68208ec1e021718a660c0d"
+    }
+  },
 
   css: ["~/assets/scss/global.scss"],
   compatibilityDate: "2025-01-17",

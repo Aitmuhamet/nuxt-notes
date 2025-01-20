@@ -1,39 +1,19 @@
 <script setup>
 import { useNoteStore } from "~/store/noteStore";
-
+// 1. Метаинформация
 definePageMeta({
     layout: "note",
     name: 'Note',
 })
+
+// 1. Инициализация зависимостей
 const route = useRoute();
+const noteStore = useNoteStore();
+
+// 2. Реактивные перменные
 const id = ref(route.params.id);
 
-const noteStore = useNoteStore();
-onMounted(async () => {
-    await noteStore.loadNotesFromLocalStorage();
-    prepareNote();
-})
-
-const prepareNote = () => {
-    const isValidId = !isNaN(Number(id.value));
-    console.group('prepareNote')
-    console.log('isValidId:', isValidId);
-    console.log('id:', id.value);
-
-
-    if (isValidId) {
-        noteStore.resetHistory();
-        noteStore.prepareNoteForEditing(Number(id.value));
-        console.log('prepareNoteForEditign');
-
-    } else {
-        noteStore.createNewNote();
-        console.log('id is NaN: createNewNote');
-    }
-    console.log('currentNote:', noteStore.currentNote);
-    console.groupEnd();
-}
-
+// 3. Вычисляемые свойства
 const noteTitle = computed({
     get: () => noteStore.currentNote.title
 });
@@ -43,7 +23,20 @@ const tasks = computed({
     set: (value) => noteStore.currentNote.tasks = value
 });
 
-const createNewTask = () => {
+
+// 4. Методы
+function prepareNote() {
+    const isValidId = !isNaN(Number(id.value));
+    if (isValidId) {
+        noteStore.resetHistory();
+        noteStore.prepareNoteForEditing(Number(id.value));
+
+    } else {
+        noteStore.createNewNote();
+    }
+}
+
+function createNewTask() {
     noteStore.createNewTask();
 
     nextTick(() => {
@@ -54,24 +47,31 @@ const createNewTask = () => {
     });
 }
 
+// 5. Сайд-эффекты
+onMounted(async () => {
+    await noteStore.loadNotesFromLocalStorage();
+    prepareNote();
+})
+
+// 6. Дополнительные подписки
+watchEffect(() => {
+    useHead({
+        title: `List: ${noteTitle.value || '_'}`, // Подставляем "Untitled", если title еще не загружен
+        meta: [
+            { name: 'description', content: 'My amazing site.' }
+        ]
+    });
+})
+
 useHead({
-    title: `Note: ${noteTitle.value || 'Untitled'}`,
+    title: `List: ${noteTitle.value || '_'}`,
     meta: [
-        { name: 'description', content: 'My amazing site.' }
+        { name: 'description', content: 'List Edit page.' }
     ],
     bodyAttrs: {
         class: 'test'
     },
     script: [{ innerHTML: 'console.log(\'Hello world\')' }]
-})
-
-watchEffect(() => {
-    useHead({
-        title: `Note: ${noteTitle.value || 'Untitled'}`, // Подставляем "Untitled", если title еще не загружен
-        meta: [
-            { name: 'description', content: 'My amazing site.' }
-        ]
-    });
 })
 </script>
 

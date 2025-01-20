@@ -92,8 +92,6 @@ console.log('canRedo: ', canRedo.value);
   padding: 1rem 2rem;
 
   &__btn {
-    padding: .5rem;
-
     &:disabled {
       background: rgba(var(--primary-color), .1);
       background: transparent;
