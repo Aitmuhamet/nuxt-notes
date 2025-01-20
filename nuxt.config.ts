@@ -44,12 +44,12 @@ export default defineNuxtConfig({
       sessionCookie: false,
     },
     config: {
-      apiKey: "AIzaSyC_otjaOnP9MyxCx4hUBXZ5Z7iRMk81ux4",
-      authDomain: "nuxt-notes-64f94.firebaseapp.com",
-      projectId: "nuxt-notes-64f94",
-      storageBucket: "nuxt-notes-64f94.firebasestorage.app",
-      messagingSenderId: "457478669304",
-      appId: "1:457478669304:web:68208ec1e021718a660c0d"
+      apiKey: process.env.API_KEY,
+      authDomain: process.env.AUTH_DOMAIN,
+      projectId: process.env.PROJECT_ID,
+      storageBucket: process.env.STORAGE_BUCKET,
+      messagingSenderId: process.env.MESSAGING_SENDER_ID,
+      appId: process.env.APP_ID
     }
   },
 
