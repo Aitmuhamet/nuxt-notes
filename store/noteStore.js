@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useLocalStorageStore } from "./localStorageStore";
 import { ref, watch, toRaw } from "vue";
-import {useToast } from "vue-toastification";
+import { useToast } from "vue-toastification";
 
 export const useNoteStore = defineStore("notes", () => {
     // 1. Инициализация зависимостей
@@ -87,7 +87,9 @@ export const useNoteStore = defineStore("notes", () => {
     const deleteNote = (noteId) => {
         notesData.value = notesData.value.filter((note) => note.id !== noteId);
         saveNotesToLocalStorage();
-        toast.success("Deleted");
+        toast.success("Deleted", {
+            position: "bottom-center"
+        });
     };
 
     const saveNote = () => {
@@ -107,7 +109,9 @@ export const useNoteStore = defineStore("notes", () => {
         }
 
         saveNotesToLocalStorage();
-        toast.success("Saved");
+        toast.success("Saved", {
+            position: "bottom-center"
+        });
     };
 
     const updateNote = (newContent) => {

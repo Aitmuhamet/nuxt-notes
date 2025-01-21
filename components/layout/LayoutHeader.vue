@@ -163,7 +163,9 @@ const saveAndNavigate = () => {
     noteStore.resetHistory();
     router.push('/');
   } else {
-    toast.warning('Title is empry');
+    toast.warning('Title is empry', {
+      position: 'bottom-center'
+    });
   }
 }
 

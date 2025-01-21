@@ -1,5 +1,4 @@
 <template>
-    <ClientOnly>
         <div class="note container mx-auto">
             <h2 class="note__title text-sm">Tasks:</h2>
             <form submit.prevent="noteStore.saveNote">
@@ -45,7 +44,6 @@
             </form>
 
         </div>
-    </ClientOnly>
 </template>
 
 <script setup>

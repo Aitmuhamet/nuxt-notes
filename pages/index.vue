@@ -1,5 +1,4 @@
 <template>
-  <ClientOnly>
     <div
       translate="no"
       class="notes-container container mx-auto gap-4 h-full hover:cursor-pointer"
@@ -48,7 +47,6 @@
       <ConfirmDialog></ConfirmDialog>
       <!-- Добавьте столько заметок, сколько нужно -->
     </div>
-  </ClientOnly>
 </template>
 
 <script setup>
