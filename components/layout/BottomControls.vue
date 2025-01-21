@@ -1,14 +1,21 @@
 <script setup>
 import { useNoteStore } from '~/store/noteStore';
+import { useModalStore } from '~/store/modalStore';
+import ConfirmDialog from '../ConfirmDialog.vue';
+
+// 1. Инициализация зависимостей
 const noteStore = useNoteStore();
+const modalStore = useModalStore();
+
+// 2. Реактивные переменные
+// 3. Вычисляемые свойства
 const note = computed({
   get: () => noteStore.currentNote
 });
+const canUndo = computed(() => noteStore.currentStep > 0);
+const canRedo = computed(() => noteStore.currentStep < noteStore.history.length - 1);
 
-import { useModalStore } from '~/store/modalStore';
-import ConfirmDialog from '../ConfirmDialog.vue';
-const modalStore = useModalStore();
-
+// 4. Методы
 const deleteNote = (note) => {
   modalStore.openModal("confirmDelete", note);
 }
@@ -17,14 +24,9 @@ const discardChanges = () => {
   modalStore.openModal('comfirmDiscardChanges')
 }
 
-console.log('currentStep: ', noteStore.currentStep);
-
-const canUndo = computed(() => noteStore.currentStep > 0);
-const canRedo = computed(() => noteStore.currentStep < noteStore.history.length - 1);
-
-console.log('canUndo: ', canUndo.value);
-console.log('canRedo: ', canRedo.value);
-
+// 5. Логика
+// 6. Хуки
+// 7. Вспомогательные функции
 
 </script>
 

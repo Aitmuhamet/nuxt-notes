@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useModalStore } from '~/store/modalStore';
-const modalStore = useModalStore();
-
 import { useNoteStore } from '~/store/noteStore';
-const noteStore = useNoteStore();
 
+// 1. Инициализация зависимостей
+const modalStore = useModalStore();
+const noteStore = useNoteStore();
+const router = useRouter();
+
+// 2. Реактивные переменные
+// 3. Вычисляемые свойства
 const isModalVisible = computed(() => modalStore.isModalVisible);
 const modalData = computed(() => modalStore.modalData);
 const modalType = computed(() => modalStore.modalType)
-
-const router = useRouter();
-
+// 4. Методы
 const confirmDelete = (noteId) => {
     console.log('noteId: ', noteId);
 
@@ -28,6 +30,22 @@ const confirmDiscardChanges = () => {
 }
 
 const closeModal = modalStore.closeModal;
+
+// 5. Логика
+// 6. Хуки
+// 7. Вспомогательные функции
+// 8. Вспомогательные компоненты
+
+// 9. Экспорт компонентов
+// 10. Экспорт переменных
+// 11. Экспорт функций
+// 12. Экспорт хуков
+// 13. Экспорт констант
+// 14. Экспорт типов
+// 15. Экспорт прочего
+
+
+
 </script>
 
 <template>
