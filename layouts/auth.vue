@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <main>
+        <main >
             <slot />
         </main>
     </div>
@@ -10,4 +10,5 @@
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

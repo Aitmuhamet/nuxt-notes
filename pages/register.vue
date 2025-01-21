@@ -131,7 +131,7 @@
                         to="/login"
                         class="register-page__link"
                     >
-                        Already have an account?
+                        Already have an profile?
                         <Icon
                             name="solar:user-check-bold-duotone"
                             class=" text-xl text-sm text-amber-500 hover:text-amber-600"
@@ -174,7 +174,9 @@ const confirmPassword = ref('');
 // 4. Методы
 const handleRegister = async () => {
     if (password.value !== confirmPassword.value) {
-        toast.error('Passwords do not match');
+        toast.error('Passwords do not match', {
+            position: 'bottom-center'
+        });
         return;
     }
 
@@ -185,14 +187,14 @@ const handleRegister = async () => {
     });
 
     if (authStore.user) {
-        router.push('/account');
+        router.push('/profile');
     }
 }
 
 const handleGoogleLogin = async () => {
     await authStore.login();
     if (authStore.user) {
-        router.push('/account');
+        router.push('/profile');
     }
 }
 

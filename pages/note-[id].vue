@@ -115,7 +115,7 @@ watchEffect(() => {
 })
 
 useHead({
-    title: `List: ${noteTitle.value || '_'}`,
+    title: `${noteTitle.value || '_'}`,
     meta: [
         { name: 'description', content: 'List Edit page.' }
     ],
@@ -137,30 +137,21 @@ useHead({
     display: flex;
     gap: 10px;
 
-    * {
-        transition: scale .3s, filter .3s;
-    }
-    &:has(:hover) :not(:hover) {
-        scale: 0.95;
-        filter: blur(2px);
-    }
-
     &:hover {
         .task__content {
             background: #f9f4ec;
             color: rgb(249, 153, 8);
         }
-
-        .btn {
-            opacity: 1;
-            background-color: transparent;
-        }
-
     }
 
     &:focus-within {
         .task__content {
             background: #f9f4ec;
+        }
+
+        .task__btn {
+            opacity: 1;
+            background-color: transparent;
         }
     }
 
@@ -208,5 +199,22 @@ useHead({
         }
     }
 
+    @media (min-width: 1024px) {
+        * {
+            transition: scale .3s, filter .3s;
+        }
+
+        &:has(:hover) :not(:hover) {
+            scale: 0.95;
+            filter: blur(2px);
+        }
+
+        &:hover {
+            .btn {
+                opacity: 1;
+                background-color: transparent;
+            }
+        }
+    }
 }
 </style>

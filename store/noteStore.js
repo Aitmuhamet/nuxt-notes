@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useLocalStorageStore } from "./localStorageStore";
 import { ref, watch, toRaw } from "vue";
-import { useToast } from "vue-toastification";
+import {useToast } from "vue-toastification";
 
 export const useNoteStore = defineStore("notes", () => {
     // 1. Инициализация зависимостей
@@ -27,6 +27,18 @@ export const useNoteStore = defineStore("notes", () => {
     const history = ref([]);
 
     // 3. Вычисляемые свойства
+    const todosListsCount = computed(() => notesData.value.length);
+    const completedTodosCount = computed(() =>
+        notesData.value.reduce((acc, note) => {
+            return acc + note.tasks.filter((task) => task.isCompleted).length;
+        }, 0)
+    );
+    const numberOfTasks = computed(() =>
+        notesData.value.reduce((acc, note) => {
+            return acc + note.tasks.length;
+        }, 0)
+    );
+
     // 4. Методы
     const loadNotesFromLocalStorage = () => {
         const storedNotes = localStorageStore.getFromLocalStorage("notes");
@@ -43,12 +55,11 @@ export const useNoteStore = defineStore("notes", () => {
     const saveNotesToLocalStorage = () => {
         localStorageStore.saveToLocalStorage("notes", notesData.value);
     };
-    
+
     const init = () => {
         loadNotesFromLocalStorage();
     };
 
-    
     const prepareNoteForEditing = (noteId) => {
         if (noteId) {
             const note = notesData.value.find((note) => note.id === noteId);
@@ -72,7 +83,7 @@ export const useNoteStore = defineStore("notes", () => {
             ? notesData.value[notesData.value.length - 1].id + 1
             : 1;
     };
-    
+
     const deleteNote = (noteId) => {
         notesData.value = notesData.value.filter((note) => note.id !== noteId);
         saveNotesToLocalStorage();
@@ -149,7 +160,6 @@ export const useNoteStore = defineStore("notes", () => {
         }
     };
 
-
     const deleteTask = (taskId) => {
         currentNote.value.tasks = currentNote.value.tasks.filter(
             (task) => task.id !== taskId
@@ -162,7 +172,6 @@ export const useNoteStore = defineStore("notes", () => {
 
         return `${noteId}_${index + 1}`;
     };
-
 
     const resetHistory = () => {
         history.value = [];
@@ -190,7 +199,7 @@ export const useNoteStore = defineStore("notes", () => {
     onMounted(() => {
         loadNotesFromLocalStorage();
     });
-    
+
     // 7. Вспомогательные функции
     watch(
         currentNote,
@@ -216,7 +225,6 @@ export const useNoteStore = defineStore("notes", () => {
 
     // 8. Вспомогательные компоненты
 
-    
     return {
         // 9. Экспорт компонентов
         // 10. Экспорт переменных
@@ -224,6 +232,9 @@ export const useNoteStore = defineStore("notes", () => {
         currentNote,
         currentStep,
         history,
+        todosListsCount,
+        completedTodosCount,
+        numberOfTasks,
         // 11. Экспорт функций
         init,
         deleteTask,

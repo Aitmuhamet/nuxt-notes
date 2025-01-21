@@ -58,7 +58,7 @@ import ConfirmDialog from '~/components/ConfirmDialog.vue';
 
 // Метаинформация
 useHead({
-  title: `All Lists`, // Подставляем "Untitled", если title еще не загружен
+  title: `Lists`, // Подставляем "Untitled", если title еще не загружен
   meta: [
     { name: 'description', content: 'All lists in the site.' }
   ]

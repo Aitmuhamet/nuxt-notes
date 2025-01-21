@@ -30,7 +30,7 @@ export const useAuthStore = defineStore("auth", () => {
         try {
             await signInWithPopup(auth, new GoogleAuthProvider());
             user.value = useCurrentUser();
-            router.replace("/account");
+            router.replace("/");
         } catch (error) {
             throw error;
         }

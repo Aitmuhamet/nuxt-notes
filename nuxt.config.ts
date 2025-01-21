@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     buildAssetsDir: '/_nuxt/', // добавляем это для правильного пути к ассетам
     layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
-      title: 'All Lists', // Название страницы по умолчанию
+      title: 'Lists', // Название страницы по умолчанию
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -83,6 +83,15 @@ const discardChanges = () => {
 
 <style lang="scss" scoped>
 .bottom-controls {
+  * {
+    transition: scale .3s, filter .3s, transform .3s;
+  }
+
+  &:has(:hover) :not(:hover) {
+    scale: 0.98;
+    filter: blur(2px);
+  }
+
   position: fixed;
   bottom: 2rem;
   display: flex;
