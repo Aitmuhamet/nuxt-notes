@@ -68,8 +68,8 @@ export const useAuthStore = defineStore("auth", () => {
         router.replace("/login");
     };
 
-    // 5. Сайд-эффекты
-    // 6. Дополнительные подписки
+    // 5. Хуки
+    // 6. Вспомогательные функции
 
     return {
         user,

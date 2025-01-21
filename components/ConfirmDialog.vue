@@ -1,53 +1,3 @@
-<script setup lang="ts">
-import { computed } from 'vue';
-import { useModalStore } from '~/store/modalStore';
-import { useNoteStore } from '~/store/noteStore';
-
-// 1. Инициализация зависимостей
-const modalStore = useModalStore();
-const noteStore = useNoteStore();
-const router = useRouter();
-
-// 2. Реактивные переменные
-// 3. Вычисляемые свойства
-const isModalVisible = computed(() => modalStore.isModalVisible);
-const modalData = computed(() => modalStore.modalData);
-const modalType = computed(() => modalStore.modalType)
-// 4. Методы
-const confirmDelete = (noteId) => {
-    console.log('noteId: ', noteId);
-
-    noteStore.deleteNote(noteId);
-    noteStore.resetHistory();
-    modalStore.closeModal();
-    router.push('/')
-}
-
-const confirmDiscardChanges = () => {
-    noteStore.resetHistory();
-    modalStore.closeModal();
-    router.push('/');
-}
-
-const closeModal = modalStore.closeModal;
-
-// 5. Логика
-// 6. Хуки
-// 7. Вспомогательные функции
-// 8. Вспомогательные компоненты
-
-// 9. Экспорт компонентов
-// 10. Экспорт переменных
-// 11. Экспорт функций
-// 12. Экспорт хуков
-// 13. Экспорт констант
-// 14. Экспорт типов
-// 15. Экспорт прочего
-
-
-
-</script>
-
 <template>
     <teleport to='#teleports'>
         <div
@@ -88,12 +38,60 @@ const closeModal = modalStore.closeModal;
                         >No</button>
                     </div>
                 </div>
-
-                <!-- <slot :data="modalData"></slot> -->
             </div>
         </div>
     </teleport>
 </template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useModalStore } from '~/store/modalStore';
+import { useNoteStore } from '~/store/noteStore';
+
+// 1. Метаинформация
+// 2. Инициализация зависимостей
+const modalStore = useModalStore();
+const noteStore = useNoteStore();
+const router = useRouter();
+
+// 3. Реактивные переменные
+// 4. Вычисляемые свойства
+const isModalVisible = computed(() => modalStore.isModalVisible);
+const modalData = computed(() => modalStore.modalData);
+const modalType = computed(() => modalStore.modalType);
+
+// 5. Методы
+const confirmDelete = (noteId) => {
+    console.log('noteId: ', noteId);
+
+    noteStore.deleteNote(noteId);
+    noteStore.resetHistory();
+    modalStore.closeModal();
+    router.push('/')
+}
+
+const confirmDiscardChanges = () => {
+    noteStore.resetHistory();
+    modalStore.closeModal();
+    router.push('/');
+}
+
+const closeModal = modalStore.closeModal;
+
+// 6. Логика
+// 7. Хуки
+// 8. Вспомогательные функции
+// 9. Вспомогательные компоненты
+
+// 10. Экспорт компонентов
+// 11. Экспорт переменных
+// 12. Экспорт функций
+// 13. Экспорт хуков
+// 14. Экспорт констант
+// 15. Экспорт типов
+// 16. Экспорт прочего
+
+</script>
 
 <style scoped>
 .modal {

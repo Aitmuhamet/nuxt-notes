@@ -2,10 +2,13 @@ import { defineStore } from "pinia";
 import { ref } from 'vue'
 
 export const useModalStore = defineStore('modalStore', () => {
+
+    // 1. Реактивные переменные
     const isModalVisible = ref(false);
     const modalData = ref(null);
     const modalType = ref(null);
 
+    // 
     const openModal = (type, data = null) => {
         modalType.value = type;
         isModalVisible.value = true;

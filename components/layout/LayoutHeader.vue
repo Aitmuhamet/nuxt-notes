@@ -1,86 +1,3 @@
-<script setup lang="ts">
-import { useToast } from 'vue-toastification';
-import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from 'vue'
-import { useNoteStore } from '~/store/noteStore';
-import { useModalStore } from '~/store/modalStore';
-import { useAuthStore } from '~/store/authStore';
-
-// 1. Инициализация зависимостей
-const noteStore = useNoteStore();
-const modalStore = useModalStore();
-const authStore = useAuthStore();
-const router = useRouter();
-const route = useRoute();
-const toast = useToast();
-
-// 2. Реактивные переменные
-const labelInput = ref<HTMLInputElement | null>(null);
-
-// 3. Вычисляемые свойства
-const note = computed({
-  get: () => noteStore.currentNote,
-  set: (value) => noteStore.currentNote = value
-});
-const isNoteTitleEmpty = computed(() => noteStore.currentNote.title?.length === 0)
-const isNoteEditPage = computed(() => route.path.includes('/note'));
-
-// 4. Методы
-const handleKeydown = (event) => {
-  if (event.code === 'Enter' && route.path !== '/') {
-    saveAndNavigate();
-  } else if (event.code === 'Space' && route.path === '/') {
-    router.push('/note/[new]')
-  } else if (event.code === 'Escape' && route.path !== '/') {
-    discardChanges();
-  }
-}
-
-const saveAndNavigate = () => {
-  console.log('isNoteTitleEmpty:', isNoteTitleEmpty.value);
-
-  if (!isNoteTitleEmpty.value) {
-    noteStore.saveNote();
-    noteStore.resetHistory();
-    router.push('/');
-  } else {
-    toast.warning('Title is empry')
-  }
-}
-
-const discardChanges = () => {
-  console.log('route.path:', route.path);
-  console.log('noteStore:', noteStore.currentStep);
-
-  if (route.path !== '/' && noteStore.currentStep !== 0) {
-    modalStore.openModal('comfirmDiscardChanges');
-  } else if (route.path !== '/' && noteStore.currentStep === 0) {
-    console.log('router.push');
-
-    router.push('/');
-  }
-}
-
-// 5. Сайд-эффекты
-onMounted(() => {
-  window.addEventListener('keydown', handleKeydown)
-  if (labelInput.value) {
-    labelInput.value.focus()
-  }
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('keydown', handleKeydown)
-})
-
-// 6. Дополнительные подписки
-watchEffect(() => {
-  if (labelInput.value) {
-    labelInput.value.focus()
-  }
-})
-
-</script>
-
 <template>
   <header class="header container mx-auto mt-4 mb-8 px-4 flex items-center justify-start rounded-xl">
     <div class="text-xl lg:text-5xl flex gap-1">
@@ -90,7 +7,7 @@ watchEffect(() => {
         type="button"
         class="btn header__logo-btn"
         aria-label="Discard Changes"
-        @click="router.push('/note/[new]')"
+        @click="router.push('/note-[new]')"
       >
         <Icon
           name="solar:notification-unread-bold-duotone"
@@ -154,11 +71,11 @@ watchEffect(() => {
           v-if="authStore.user?.photoURL"
           :src="authStore.user?.photoURL"
           alt="Logo image"
-          class="h-12 w-12"
+          class="header__user-img h-12 w-12"
         >
         <Icon
           v-else
-          name="solar:user-rounded-bold-duotone"
+          name="solar:user-check-rounded-bold-duotone"
           class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
         />
       </button>
@@ -170,7 +87,7 @@ watchEffect(() => {
         @click="authStore.logout()"
       >
         <Icon
-          name="solar:user-cross-line-duotone"
+          name="solar:logout-3-bold-duotone"
           class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
         />
       </button>
@@ -182,13 +99,95 @@ watchEffect(() => {
         @click="router.push('/login')"
       >
         <Icon
-          name="solar:user-rounded-broken"
+          name="solar:login-3-line-duotone"
           class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
         />
       </button>
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+import { useToast } from 'vue-toastification';
+import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from 'vue'
+import { useNoteStore } from '~/store/noteStore';
+import { useModalStore } from '~/store/modalStore';
+import { useAuthStore } from '~/store/authStore';
+
+// 1. Метаинформация
+// 2. Инициализация зависимостей
+const noteStore = useNoteStore();
+const modalStore = useModalStore();
+const authStore = useAuthStore();
+const router = useRouter();
+const route = useRoute();
+const toast = useToast();
+
+// 3. Реактивные переменные
+const labelInput = ref<HTMLInputElement | null>(null);
+
+// 4. Вычисляемые свойства
+const note = computed({
+  get: () => noteStore.currentNote,
+  set: (value) => noteStore.currentNote = value
+});
+const isNoteTitleEmpty = computed(() => noteStore.currentNote.title?.length === 0)
+const isNoteEditPage = computed(() => route.path.includes('/note'));
+
+// 5. Логика
+// 6. Методы
+const handleKeydown = (event) => {
+  if (event.code === 'Enter' && route.path !== '/') {
+    saveAndNavigate();
+  } else if (event.code === 'Space' && route.path === '/') {
+    router.push('/note-[new]')
+  } else if (event.code === 'Escape' && route.path !== '/') {
+    discardChanges();
+  }
+}
+
+const saveAndNavigate = () => {
+  console.log('isNoteTitleEmpty:', isNoteTitleEmpty.value);
+
+  if (!isNoteTitleEmpty.value) {
+    noteStore.saveNote();
+    noteStore.resetHistory();
+    router.push('/');
+  } else {
+    toast.warning('Title is empry')
+  }
+}
+
+const discardChanges = () => {
+  if (route.path !== '/' && noteStore.currentStep !== 0) {
+    modalStore.openModal('comfirmDiscardChanges');
+  } else if (route.path !== '/' && noteStore.currentStep === 0) {
+    console.log('router.push');
+
+    router.push('/');
+  }
+}
+
+// 7. Хуки
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
+  if (labelInput.value) {
+    labelInput.value.focus()
+  }
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeydown)
+})
+
+// 8. Дополнительные подписки
+watchEffect(() => {
+  if (labelInput.value) {
+    labelInput.value.focus()
+  }
+})
+</script>
+
 
 <style lang="scss" scoped>
 .header {
@@ -235,6 +234,11 @@ watchEffect(() => {
     @media (min-width: 1280px) {
       padding-left: 1.2rem;
     }
+  }
+
+  &__user-img {
+    border-radius: 10px;
+    padding: 0.2rem;
   }
 }
 

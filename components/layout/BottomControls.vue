@@ -1,35 +1,3 @@
-<script setup>
-import { useNoteStore } from '~/store/noteStore';
-import { useModalStore } from '~/store/modalStore';
-import ConfirmDialog from '../ConfirmDialog.vue';
-
-// 1. Инициализация зависимостей
-const noteStore = useNoteStore();
-const modalStore = useModalStore();
-
-// 2. Реактивные переменные
-// 3. Вычисляемые свойства
-const note = computed({
-  get: () => noteStore.currentNote
-});
-const canUndo = computed(() => noteStore.currentStep > 0);
-const canRedo = computed(() => noteStore.currentStep < noteStore.history.length - 1);
-
-// 4. Методы
-const deleteNote = (note) => {
-  modalStore.openModal("confirmDelete", note);
-}
-
-const discardChanges = () => {
-  modalStore.openModal('comfirmDiscardChanges')
-}
-
-// 5. Логика
-// 6. Хуки
-// 7. Вспомогательные функции
-
-</script>
-
 <template>
   <div class="bottom-controls text-neutral-500 flex gap-6
     ">
@@ -80,6 +48,38 @@ const discardChanges = () => {
   <ConfirmDialog>
   </ConfirmDialog>
 </template>
+
+<script setup>
+import { useNoteStore } from '~/store/noteStore';
+import { useModalStore } from '~/store/modalStore';
+import ConfirmDialog from '../ConfirmDialog.vue';
+
+// 1. Инициализация зависимостей
+const noteStore = useNoteStore();
+const modalStore = useModalStore();
+
+// 2. Реактивные переменные
+// 3. Вычисляемые свойства
+const note = computed({
+  get: () => noteStore.currentNote
+});
+const canUndo = computed(() => noteStore.currentStep > 0);
+const canRedo = computed(() => noteStore.currentStep < noteStore.history.length - 1);
+
+// 4. Методы
+const deleteNote = (note) => {
+  modalStore.openModal("confirmDelete", note);
+}
+
+const discardChanges = () => {
+  modalStore.openModal('comfirmDiscardChanges')
+}
+
+// 5. Логика
+// 6. Хуки
+// 7. Вспомогательные функции
+
+</script>
 
 <style lang="scss" scoped>
 .bottom-controls {

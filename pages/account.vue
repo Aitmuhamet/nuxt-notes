@@ -1,3 +1,9 @@
+<template>
+  account page
+  <button @click="authStore.logout" class="btn">Logout</button>
+  {{ authStore.user }}
+</template>
+
 <script setup>
 import { useAuthStore } from '~/store/authStore';
 // Метаинформация
@@ -19,8 +25,3 @@ const authStore = useAuthStore();
 
 
 </script>
-<template>
-    account page
-    <button @click="authStore.logout" class="btn">Logout</button>
-    {{ authStore.user }}
-</template>

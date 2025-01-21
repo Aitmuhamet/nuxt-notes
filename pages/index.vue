@@ -1,45 +1,3 @@
-<script setup>
-import { useNoteStore } from '~/store/noteStore';
-import { useModalStore } from '~/store/modalStore';
-import ConfirmDialog from '~/components/ConfirmDialog.vue';
-
-// Метаинформация
-useHead({
-  title: `All Lists`, // Подставляем "Untitled", если title еще не загружен
-  meta: [
-    { name: 'description', content: 'All lists in the site.' }
-  ]
-});
-
-// 1. Инициализация зависимостей
-const noteStore = useNoteStore();
-const modalStore = useModalStore();
-const router = useRouter();
-
-// 2. Реактивные переменные
-// 3. Вычисляемые свойства
-// 4. Методы
-const navigateWithReset = (id) => {
-  noteStore.resetHistory();
-  router.push(`/note/${id}`);
-}
-
-const deleteNote = (note) => {
-  modalStore.openModal('confirmDelete', note);
-}
-
-const first3Tasks = (tasks) => {
-  return tasks.slice(0, 3);
-}
-
-// 5. Сайд-эффекты
-onMounted(() => {
-  noteStore.loadNotesFromLocalStorage();
-})
-
-// 6. Допольнительные подписки
-</script>
-
 <template>
   <ClientOnly>
     <div
@@ -92,6 +50,48 @@ onMounted(() => {
     </div>
   </ClientOnly>
 </template>
+
+<script setup>
+import { useNoteStore } from '~/store/noteStore';
+import { useModalStore } from '~/store/modalStore';
+import ConfirmDialog from '~/components/ConfirmDialog.vue';
+
+// Метаинформация
+useHead({
+  title: `All Lists`, // Подставляем "Untitled", если title еще не загружен
+  meta: [
+    { name: 'description', content: 'All lists in the site.' }
+  ]
+});
+
+// 1. Инициализация зависимостей
+const noteStore = useNoteStore();
+const modalStore = useModalStore();
+const router = useRouter();
+
+// 2. Реактивные переменные
+// 3. Вычисляемые свойства
+// 4. Методы
+const navigateWithReset = (id) => {
+  noteStore.resetHistory();
+  router.push(`/note-${id}`);
+}
+
+const deleteNote = (note) => {
+  modalStore.openModal('confirmDelete', note);
+}
+
+const first3Tasks = (tasks) => {
+  return tasks.slice(0, 3);
+}
+
+// 5. Сайд-эффекты
+onMounted(() => {
+  noteStore.loadNotesFromLocalStorage();
+})
+
+// 6. Допольнительные подписки
+</script>
 
 <style lang="scss" scoped>
 .notes-container {

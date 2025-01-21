@@ -1,5 +1,56 @@
+<template>
+    <ClientOnly>
+        <div class="note container mx-auto">
+            <h2 class="note__title text-sm">Tasks:</h2>
+            <form submit.prevent="noteStore.saveNote">
+                <div
+                    v-for="task in tasks"
+                    :key="task.id"
+                    class="task"
+                >
+                    <div class="task__content">
+                        <input
+                            type="checkbox"
+                            :id="'task-' + task.id"
+                            v-model="task.isCompleted"
+                            class="checkbox task__checkbox"
+                        />
+                        <input
+                            type="text"
+                            v-model="task.text"
+                            placeholder="New Task"
+                            :class="{ 'completed': task.isCompleted }"
+                            :id="'text-' + task.id"
+                            class="task__text my-2 bg-transparent outline-0"
+                        />
+                    </div>
+                    <button
+                        type="button"
+                        class="btn task__btn self-center p-3 opacity-0 ms-auto"
+                        @click="noteStore.deleteTask(task.id)"
+                        aria-label="Delete Task"
+                    >
+                        <Icon
+                            name="solar:trash-bin-minimalistic-2-broken"
+                            class="text-lg text-amber-500 hover:text-red-500"
+                        />
+                    </button>
+                </div>
+                <button
+                    type="button"
+                    @click="createNewTask()"
+                    class="btn p-3 my-4 hover:text-amber-500"
+                    aria-label="Create New Task"
+                >Create new task</button>
+            </form>
+
+        </div>
+    </ClientOnly>
+</template>
+
 <script setup>
 import { useNoteStore } from "~/store/noteStore";
+
 // 1. Метаинформация
 definePageMeta({
     layout: "note",
@@ -71,59 +122,8 @@ useHead({
     bodyAttrs: {
         class: 'test'
     },
-    script: [{ innerHTML: 'console.log(\'Hello world\')' }]
 })
 </script>
-
-<template>
-    <ClientOnly>
-        <div class="note container mx-auto">
-            <h2 class="note__title text-sm">Tasks:</h2>
-            <form submit.prevent="noteStore.saveNote">
-                <div
-                    v-for="task in tasks"
-                    :key="task.id"
-                    class="task"
-                >
-                    <div class="task__content">
-                        <input
-                            type="checkbox"
-                            :id="'task-' + task.id"
-                            v-model="task.isCompleted"
-                            class="checkbox task__checkbox"
-                        />
-                        <input
-                            type="text"
-                            v-model="task.text"
-                            placeholder="New Task"
-                            :class="{ 'completed': task.isCompleted }"
-                            :id="'text-' + task.id"
-                            class="task__text my-2 bg-transparent outline-0"
-                        />
-                    </div>
-                    <button
-                        type="button"
-                        class="btn task__btn self-center p-3 opacity-0 ms-auto"
-                        @click="noteStore.deleteTask(task.id)"
-                        aria-label="Delete Task"
-                    >
-                        <Icon
-                            name="solar:trash-bin-minimalistic-2-broken"
-                            class="text-lg text-amber-500 hover:text-red-500"
-                        />
-                    </button>
-                </div>
-                <button
-                    type="button"
-                    @click="createNewTask()"
-                    class="btn p-3 my-4 hover:text-amber-500"
-                    aria-label="Create New Task"
-                >Create new task</button>
-            </form>
-
-        </div>
-    </ClientOnly>
-</template>
 
 <style lang="scss" scoped>
 .note {
