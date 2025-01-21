@@ -61,15 +61,15 @@
 
     <div class="header-actions text-xl lg:text-5xl flex gap-1">
       <button
-        v-if="authStore.user && route.path !== '/account'"
+        v-if="isUserNotOnAccountPage"
         type="button"
         class="btn header__btn"
         @click="router.push('/account')"
         aria-label="Logout"
       >
         <img
-          v-if="authStore.user?.photoURL"
-          :src="authStore.user?.photoURL"
+          v-if="authStore.user.value?.photoURL"
+          :src="authStore.user.value?.photoURL"
           alt="Logo image"
           class="header__user-img h-12 w-12"
         >
@@ -80,7 +80,7 @@
         />
       </button>
       <button
-        v-else-if="authStore.user && route.path === '/account'"
+        v-else-if="isUserOnAccountPage"
         type="button"
         class="btn header__btn"
         aria-label="Login"
@@ -133,6 +133,8 @@ const note = computed({
 });
 const isNoteTitleEmpty = computed(() => noteStore.currentNote.title?.length === 0)
 const isNoteEditPage = computed(() => route.path.includes('/note'));
+const isUserNotOnAccountPage = computed(() => authStore.user.value && route.path !== '/account');
+const isUserOnAccountPage = computed(() => authStore.user.value && route.path === '/account');
 
 // 5. Логика
 // 6. Методы
@@ -186,6 +188,10 @@ watchEffect(() => {
     labelInput.value.focus()
   }
 })
+
+// 9. Вспомогательные функции
+console.log('authStore.user:', authStore.user.value); 
+
 </script>
 
 

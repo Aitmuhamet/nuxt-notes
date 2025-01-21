@@ -128,7 +128,6 @@ const password = ref('');
 
 // 4. Вычисляемые свойства
 // 5. Логика
-
 // 6. Методы
 const handleLogin = async () => {
     if (!email.value || !password.value) {
@@ -139,16 +138,14 @@ const handleLogin = async () => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
         console.log('Logged in as', userCredential.user);
-        router.push('/dashboard');  // Переход на страницу после успешного входа
+        router.push('/');  // Переход на страницу после успешного входа
     } catch (error) {
         alert('Login failed: ' + error.message);
     }
 };
-const handleGoogleLogin = async () => {
-    await authStore.login();
-    if (authStore.user) {
-        router.push('/account');
-    }
+const handleGoogleLogin = () => {
+    authStore.login();
+    authStore.init();
 };
 // 7. Хуки
 // 8. Дополнительные подписки
@@ -159,7 +156,7 @@ const handleGoogleLogin = async () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100svh;
     background-color: #f5f5f5;
 }
 
@@ -171,7 +168,18 @@ const handleGoogleLogin = async () => {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 100%;
-    max-width: 450px;
+    height: calc(100svh - 30px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    @media (min-width: 768px) {
+        padding: 8rem 5rem;
+        max-width: 450px;
+        height: auto;
+    }
 }
 
 .login-page__form {
@@ -181,16 +189,35 @@ const handleGoogleLogin = async () => {
 .login-page__form-group {
     margin-bottom: 1rem;
     padding: .25rem .5rem;
-    border-bottom: 1px solid rgba(var(--primary-color), .4);
+    border: 1px solid rgb(var(--primary-color), .4);
+    border-radius: 8px;
     transition: border .3s, border-radius .3s;
 
     display: flex;
     align-items: center;
     gap: .5rem;
 
-    &:focus-within {
-        border: 1px solid rgb(var(--primary-color), .4);
-        border-radius: 8px;
+    position: relative;
+    box-shadow: 0 0 0 1px transparent;
+
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        display: block;
+        width: 0;
+        height: 1px;
+        background-color: rgba(var(--primary-color), .4);
+        transition: width .3s;
+    }
+    &:focus-within,
+    &:hover {
+        border: 1px solid transparent;
+
+        &::after {
+            width: 95%;
+        }
     }
 }
 
@@ -233,6 +260,7 @@ const handleGoogleLogin = async () => {
         font-size: 1.25rem;
         color: var(--text-color);
         text-transform: uppercase;
+        background-color: rgb(var(--primary-color), .05);
     }
 
     &--login:hover {
@@ -241,11 +269,11 @@ const handleGoogleLogin = async () => {
 
     &--google {
         flex: 0 0 50px;
-        background-color: #f6d5d2;
+        background-color: #fad9d6;
         color: #ffffff;
 
         &:hover {
-            background-color: #e97667;
+            background-color: #e7c7c2;
         }
     }
 }
