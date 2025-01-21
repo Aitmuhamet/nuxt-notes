@@ -1,5 +1,4 @@
 <template>
-    <ClientOnly>
         <div class="register-page">
             <div class="register-page__container">
                 <form
@@ -141,7 +140,6 @@
                 </div>
             </div>
         </div>
-    </ClientOnly>
 </template>
 
 <script setup>

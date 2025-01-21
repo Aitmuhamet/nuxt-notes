@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/', // вместо router.base
     buildAssetsDir: '/_nuxt/', // добавляем это для правильного пути к ассетам
+    pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
       title: 'Lists', // Название страницы по умолчанию

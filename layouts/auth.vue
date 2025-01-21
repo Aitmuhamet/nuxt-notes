@@ -7,6 +7,11 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layoutTransition: {
+    name: 'layout',
+  }
+})
 </script>
 
 
