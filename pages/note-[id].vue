@@ -7,7 +7,7 @@
                     :key="task.id"
                     class="task"
                 >
-                    <div class="task__content">
+                    <div class="task__content task__element--blur">
                         <input
                             type="checkbox"
                             :id="'task-' + task.id"
@@ -20,11 +20,11 @@
                             placeholder="New Task"
                             :class="{ 'completed': task.isCompleted }"
                             :id="'text-' + task.id"
-                            class="task__text my-2 bg-transparent outline-0"
+                            class="task__text task__element--blur my-2 bg-transparent outline-0"
                         />
                     </div>
                     <button
-                        type="button"
+                        type="button task__element--blur"
                         class="btn task__btn self-center p-3 opacity-0 ms-auto"
                         @click="noteStore.deleteTask(task.id)"
                         aria-label="Delete Task"
@@ -136,6 +136,16 @@ useHead({
 }
 
 .task {
+    
+    &__element--blur {
+        transition: scale .3s, filter .3s;
+    }
+
+    &:has(:hover) .task__element--blur:not(:hover) {
+        scale: 0.99;
+        filter: blur(2px);
+    }
+
     display: flex;
     gap: 10px;
 
@@ -201,24 +211,18 @@ useHead({
             outline: none;
             background-color: transparent;
         }
+
+    }
+
+    &:hover {
+        .btn {
+            opacity: 1;
+            background-color: transparent;
+        }
     }
 
     @media (min-width: 1024px) {
-        * {
-            transition: scale .3s, filter .3s;
-        }
-
-        &:has(:hover) :not(:hover) {
-            scale: 0.95;
-            filter: blur(2px);
-        }
-
-        &:hover {
-            .btn {
-                opacity: 1;
-                background-color: transparent;
-            }
-        }
+       
     }
 }
 </style>
