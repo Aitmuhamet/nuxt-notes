@@ -32,7 +32,7 @@
         </li>
       </ul>
       <button
-        class="note__btn w-8 h-8 absolute bottom-1 right-1 opacity-0"
+        class="note__btn w-8 h-8 absolute bottom-1 right-1 md:opacity-0"
         @click.stop="deleteNote(note)"
         type="button"
         aria-label="Delete Note"
