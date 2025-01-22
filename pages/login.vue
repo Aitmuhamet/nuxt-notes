@@ -78,7 +78,7 @@
 
             <div class="login-page__footer">
                 <button
-                    @click="router.push('/register')"
+                    @click="router.replace('/register')"
                     class="login-page__link"
                 >
                     <Icon

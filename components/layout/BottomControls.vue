@@ -1,25 +1,31 @@
 <template>
-  <div class="bottom-controls text-neutral-500 flex gap-6
+  <div class="bottom-controls text-neutral-500
     ">
     <button
       class="btn bottom-controls__btn hover:text-stone-500"
       @click="noteStore.undo()"
       :disabled="!canUndo"
     >
-      <Icon
-        name="solar:double-alt-arrow-left-broken"
-        class="text-4xl md:text-5xl text-amber-500 hover:text-stone-500"
-      />
+      <div class="btn-inner">
+        <Icon
+          name="solar:double-alt-arrow-left-broken"
+          class="text-4xl md:text-5xl text-amber-500 hover:text-stone-500"
+        />
+      </div>
+      Undo
     </button>
     <button
       class="btn bottom-controls__btn hover:text-stone-500"
       @click="noteStore.redo()"
       :disabled="!canRedo"
     >
-      <Icon
-        name="solar:double-alt-arrow-right-broken"
-        class="text-4xl md:text-5xl text-amber-500 hover:text-stone-500"
-      />
+      <div class="btn-inner">
+        <Icon
+          name="solar:double-alt-arrow-right-broken"
+          class="text-4xl md:text-5xl text-amber-500 hover:text-stone-500"
+        />
+      </div>
+      Redo
     </button>
     <button
       class="btn bottom-controls__btn"
@@ -27,10 +33,13 @@
       @click="deleteNote(note)"
       aria-label="Delete Note"
     >
-      <Icon
-        name="solar:trash-bin-minimalistic-2-broken"
-        class="text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
-      />
+      <div class="btn-inner">
+        <Icon
+          name="solar:trash-bin-minimalistic-2-broken"
+          class="text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
+        />
+      </div>
+      Trash
     </button>
     <button
       type="button"
@@ -38,10 +47,13 @@
       @click="discardChanges()"
       aria-label="Cancel Changes"
     >
-      <Icon
-        name="solar:close-circle-broken"
-        class="text-4xl md:text-5xl text-amber-500 hover:text-red-500 "
-      />
+      <div class="btn-inner">
+        <Icon
+          name="solar:close-circle-broken"
+          class="text-4xl md:text-5xl text-amber-500 hover:text-red-500 "
+        />
+      </div>
+      Cancel
     </button>
   </div>
 
@@ -87,7 +99,7 @@ const discardChanges = () => {
     transition: scale .3s, filter .3s, transform .3s;
   }
 
-  &:has(:hover) :not(:hover) {
+  &:has(:hover) .btn:not(:hover) {
     scale: 0.98;
     filter: blur(2px);
   }
@@ -100,11 +112,10 @@ const discardChanges = () => {
 
   border: 1px solid rgba(var(--primary-color), 0.3);
   border-radius: .75rem;
-  padding: 1rem 2rem;
+  padding: 0 .5rem;
 
   &__btn {
     &:disabled {
-      background: rgba(var(--primary-color), .1);
       background: transparent;
       color: rgb(var(--primary-color));
     }

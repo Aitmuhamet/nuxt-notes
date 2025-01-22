@@ -129,6 +129,10 @@ useHead({
     font-weight: 400;
     color: #000;
     margin-top: 1.5rem;
+    
+    &__title {
+        margin-bottom: 1rem;
+    }
 }
 
 .task {
@@ -187,7 +191,9 @@ useHead({
     }
 
     &__btn {
-        flex: 0 0 10px;
+        flex: 0 0 auto;
+        border: 1px solid var(--bg-color);
+        border-radius: 10px;
 
         &:focus {
             opacity: 1;

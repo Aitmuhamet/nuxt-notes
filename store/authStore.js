@@ -8,6 +8,7 @@ import {
     GoogleAuthProvider,
     signOut,
 } from "firebase/auth";
+import toast from "~/plugins/toast";
 
 export const useAuthStore = defineStore("auth", () => {
     // 1. Инициализация зависимостей
@@ -31,6 +32,9 @@ export const useAuthStore = defineStore("auth", () => {
             await signInWithPopup(auth, new GoogleAuthProvider());
             user.value = useCurrentUser();
             router.replace("/");
+            toast.success("You are logged in");
+            console.log('You are logged in');
+            
         } catch (error) {
             throw error;
         }

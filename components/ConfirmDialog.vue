@@ -119,5 +119,7 @@ const closeModal = modalStore.closeModal;
 
 .btn {
     padding: 0.75rem 3.5rem;
+    border: 1px solid rgba(var(--primary-color), 1);
+    border-radius: 10px;
 }
 </style>

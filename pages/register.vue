@@ -126,8 +126,8 @@
                 </form>
 
                 <div class="register-page__footer">
-                    <NuxtLink
-                        to="/login"
+                    <button
+                        @click="router.replace('/login')"
                         class="register-page__link"
                     >
                         Already have an profile?
@@ -136,7 +136,7 @@
                             class=" text-xl text-sm text-amber-500 hover:text-amber-600"
                         />
                         Login
-                    </NuxtLink>
+                    </button>
                 </div>
             </div>
         </div>

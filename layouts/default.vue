@@ -18,7 +18,7 @@
   flex-direction: column;
 }
 main {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
   align-items: stretch;
