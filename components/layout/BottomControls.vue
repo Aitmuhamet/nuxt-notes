@@ -94,8 +94,9 @@ const discardChanges = () => {
 </script>
 
 <style lang="scss" scoped>
+
 .bottom-controls {
-  * {
+  .btn {
     transition: scale .3s, filter .3s, transform .3s;
   }
 

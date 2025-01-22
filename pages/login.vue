@@ -11,12 +11,12 @@
                         class="login-page__label"
                     >
                         <Icon
-                            v-if="email.length === 0"
+                            v-show="email.length === 0"
                             name="solar:mailbox-line-duotone"
                             class=" text-xl sm:text-lg md:text-3xl text-amber-500 hover:text-amber-600"
                         />
                         <Icon
-                            v-else
+                            v-show="email.length > 0"
                             name="solar:mailbox-bold-duotone"
                             class=" text-xl sm:text-lg md:text-3xl text-amber-500 hover:text-amber-600"
                         />
@@ -36,12 +36,12 @@
                         class="login-page__label"
                     >
                         <Icon
-                            v-if="password.length === 0"
+                            v-show="password.length === 0"
                             name="solar:password-minimalistic-input-line-duotone"
                             class=" text-xl sm:text-lg md:text-3xl text-amber-500 hover:text-amber-600"
                         />
                         <Icon
-                            v-else
+                            v-show="password.length > 0"
                             name="solar:password-minimalistic-input-bold-duotone"
                             class=" text-xl sm:text-lg md:text-3xl text-amber-500 hover:text-amber-600"
                         />
