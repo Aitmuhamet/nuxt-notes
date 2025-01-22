@@ -26,15 +26,11 @@ export const useAuthStore = defineStore("auth", () => {
 
     const login = async (email = null, password = null) => {
         const auth = getAuth();
-        console.log("auth", auth);
 
         try {
             await signInWithPopup(auth, new GoogleAuthProvider());
             user.value = useCurrentUser();
             router.replace("/");
-            toast.success("You are logged in");
-            console.log('You are logged in');
-            
         } catch (error) {
             throw error;
         }

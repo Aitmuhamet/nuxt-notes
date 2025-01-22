@@ -137,7 +137,6 @@ const handleLogin = async () => {
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
-        console.log('Logged in as', userCredential.user);
         router.push('/');  // Переход на страницу после успешного входа
     } catch (error) {
         alert('Login failed: ' + error.message);
