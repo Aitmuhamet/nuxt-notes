@@ -1,8 +1,8 @@
 <script setup>
-import { useAuthStore } from './store/authStore';
+import { useUserStore } from './store/user';
 
 // 1. Инициализация зависимостей
-const authStore = useAuthStore();
+const userStore = useUserStore();
 const user = useCurrentUser();
 const router = useRouter();
 
@@ -14,7 +14,6 @@ const router = useRouter();
 onMounted(() => {
   watch(user, (currentUser, prevUser) => {
     
-    authStore.init(); 
     
     console.group('onMounted: app');
     console.log('currentUser: ', currentUser);

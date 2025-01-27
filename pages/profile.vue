@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '~/store/authStore';
+import { useUserStore } from '~/store/user';
 import { useNoteStore } from '~/store/noteStore';
 // Метаинформация
 useHead({
@@ -42,7 +42,7 @@ useHead({
 });
 
 // 1. Инициализация зависимостей
-const authStore = useAuthStore();
+const userStore = useUserStore();
 const user = useCurrentUser();
 const noteStore = useNoteStore();
 
@@ -53,7 +53,7 @@ const noteStore = useNoteStore();
 // 5. Логика
 // 5. Хуки
 onBeforeMount(() => {
-  authStore.init();
+  // userStore.init();
 })
 // 6. Дполнительные подписки
 </script>

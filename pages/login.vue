@@ -105,7 +105,7 @@
 
 
 <script setup>
-import { useAuthStore } from '~/store/authStore';
+import { useUserStore } from '~/store/user';
 // 1. Метаинформация
 useHead({
     title: `Login`, // Подставляем "Untitled", если title еще не загружен
@@ -119,7 +119,7 @@ definePageMeta({
 })
 
 // 2. Инициализация зависимостей
-const authStore = useAuthStore()
+const userStore = useUserStore()
 const router = useRouter();
 
 // 3. Реактивные переменные
@@ -143,8 +143,7 @@ const handleLogin = async () => {
     }
 };
 const handleGoogleLogin = () => {
-    authStore.login();
-    authStore.init();
+    userStore.login();
 };
 // 7. Хуки
 // 8. Дополнительные подписки

@@ -143,7 +143,7 @@
 </template>
 
 <script setup>
-import { useAuthStore } from "~/store/authStore";
+import { useUserStore } from "~/store/user";
 import { useToast } from "vue-toastification";
 
 // 1. Метаинформация
@@ -159,7 +159,7 @@ definePageMeta({
 })
 
 // 2. Инициализация зависимостей
-const authStore = useAuthStore()
+const userStore = useUserStore()
 const router = useRouter();
 const toast = useToast();
 
@@ -178,20 +178,20 @@ const handleRegister = async () => {
         return;
     }
 
-    await authStore.register({
+    await userStore.register({
         name: name.value,
         email: email.value,
         password: password.value
     });
 
-    if (authStore.user) {
+    if (userStore.user) {
         router.push('/profile');
     }
 }
 
 const handleGoogleLogin = async () => {
-    await authStore.login();
-    if (authStore.user) {
+    await userStore.login();
+    if (userStore.user) {
         router.push('/profile');
     }
 }

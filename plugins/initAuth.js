@@ -1,9 +1,9 @@
-import { useAuthStore } from "~/store/authStore";
+import { useUserStore } from "~/store/user";
 
 export default defineNuxtPlugin(() => {
-    const authStore = useAuthStore();
-    authStore.init();
+    const userStore = useUserStore();
+    userStore.init();
   
-    console.log('user', authStore.user);
+    console.log('user', userStore.user);
     
 });

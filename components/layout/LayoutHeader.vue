@@ -84,8 +84,8 @@
       >
         <div class="btn-inner">
           <img
-            v-if="authStore.user.value?.photoURL"
-            :src="authStore.user.value?.photoURL"
+            v-if="userStore.user.value?.photoURL"
+            :src="userStore.user.value?.photoURL"
             alt="Logo image"
             class="header__user-img h-8 w-8  sm:h-10 sm:w-10 md:h-12 md:w-12"
           >
@@ -102,7 +102,7 @@
         type="button"
         class="btn header__btn"
         aria-label="Login"
-        @click="authStore.logout()"
+        @click="userStore.logout()"
       >
         <div class="btn-inner">
           <Icon
@@ -138,13 +138,13 @@ import { useToast } from 'vue-toastification';
 import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import { useNoteStore } from '~/store/noteStore';
 import { useModalStore } from '~/store/modalStore';
-import { useAuthStore } from '~/store/authStore';
+import { useUserStore } from '~/store/user';
 
 // 1. Метаинформация
 // 2. Инициализация зависимостей
 const noteStore = useNoteStore();
 const modalStore = useModalStore();
-const authStore = useAuthStore();
+const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
 const toast = useToast();
@@ -159,8 +159,8 @@ const note = computed({
 });
 const isNoteTitleEmpty = computed(() => noteStore.currentNote.title?.length === 0)
 const isNoteEditPage = computed(() => route.path.includes('/note'));
-const isUserNotOnAccountPage = computed(() => authStore.user.value && route.path !== '/profile');
-const isUserOnAccountPage = computed(() => authStore.user.value && route.path === '/profile');
+const isUserNotOnAccountPage = computed(() => userStore.user.value && route.path !== '/profile');
+const isUserOnAccountPage = computed(() => userStore.user.value && route.path === '/profile');
 const noteButtonText = computed(() => (isNoteEditPage.value && isNoteTitleEmpty.value) ? 'All Lists' : (isNoteEditPage.value && !isNoteTitleEmpty.value) ? 'Save' : 'New');
 const userButtonText = computed(() => isUserNotOnAccountPage.value ? 'Profile' : isUserOnAccountPage.value ? 'Logout' : 'Login');
 

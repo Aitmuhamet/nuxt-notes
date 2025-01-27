@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import toast from "~/plugins/toast";
 
-export const useAuthStore = defineStore("auth", () => {
+export const useUserStore = defineStore("user", () => {
     // 1. Инициализация зависимостей
     const router = useRouter();
 
