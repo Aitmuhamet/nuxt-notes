@@ -8,7 +8,9 @@ import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
+    updateProfile,
 } from "firebase/auth";
+
 
 export const useUserStore = defineStore("user", () => {
     // 1. Инициализация зависимостей
@@ -17,6 +19,7 @@ export const useUserStore = defineStore("user", () => {
     // 2. Реактивные переменные
     const user = ref(null);
     const loading = ref(true);
+    const auth = getAuth();
 
     // 3. Вычисляемые свойства
     // 4. Методы
@@ -24,15 +27,11 @@ export const useUserStore = defineStore("user", () => {
         user.value = useCurrentUser();
     };
 
-    const regitsterWithEmail = async (email, password) => {
-        
-    }
-
-    const login = async () => {
-        const auth = getAuth();
+    const loginWithGoogle = async () => {
+        const provider = new GoogleAuthProvider();
 
         try {
-            await signInWithPopup(auth, new GoogleAuthProvider());
+            await signInWithPopup(auth, provider);
             user.value = useCurrentUser();
             router.replace("/");
         } catch (error) {
@@ -41,15 +40,39 @@ export const useUserStore = defineStore("user", () => {
     };
 
     const logout = async () => {
-        const auth = getAuth();
         if (auth) {
             await signOut(auth);
             user.value = null;
-            router.push("/");
+            router.replace("/");
         } else {
             console.error("Authentication object is null");
         }
     };
+
+    const registerWithEmail = async (email, password, name) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            console.log('userCredential', userCredential);
+            user.value = useCurrentUser();
+
+            await updateProfile(userCredential.user, {
+                displayName: name,
+            }
+            )
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const loginWithEmail = async (email, password) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+            console.log('userCredential', userCredential);
+            user.value = useCurrentUser();
+        } catch (error) {
+            throw error;
+        }
+    }
 
     // 5. Хуки
     // 6. Вспомогательные функции
@@ -58,7 +81,9 @@ export const useUserStore = defineStore("user", () => {
         user,
         loading,
         init,
-        login,
+        loginWithGoogle,
+        registerWithEmail,
+        loginWithEmail,
         logout,
     };
 });

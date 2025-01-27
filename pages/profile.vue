@@ -3,10 +3,16 @@
     <!-- Фото -->
     <div class="user-profile__photo">
       <img
+        v-if="user.photoURL"
         :src="user.photoURL"
         alt="User Photo"
         class="user-profile__image"
       >
+      <Icon
+            v-else
+            name="solar:user-check-rounded-bold-duotone"
+            class=" text-6xl sm:text-8xl md:text-9xl text-amber-500 hover:text-amber-600"
+          />
     </div>
 
     <!-- Информация -->

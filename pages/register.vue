@@ -178,13 +178,9 @@ const handleRegister = async () => {
         return;
     }
 
-    await userStore.register({
-        name: name.value,
-        email: email.value,
-        password: password.value
-    });
+    await userStore.registerWithEmail(email.value, password.value, name.value);
 
-    if (userStore.user) {
+    if (userStore.user.value) {
         router.push('/profile');
     }
 }

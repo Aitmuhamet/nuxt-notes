@@ -135,16 +135,19 @@ const handleLogin = async () => {
         return;
     }
 
-    try {
-        const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value);
-        router.push('/');  // Переход на страницу после успешного входа
-    } catch (error) {
-        alert('Login failed: ' + error.message);
+    await userStore.loginWithEmail(email.value, password.value);
+
+    console.log('userStore.user.value', userStore.user.value);
+    
+    if (userStore.user.value) {
+        router.replace('/');
     }
 };
+
 const handleGoogleLogin = () => {
-    userStore.login();
+    userStore.loginWithGoogle();
 };
+
 // 7. Хуки
 // 8. Дополнительные подписки
 </script>
