@@ -2,13 +2,13 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import {
-    onAuthStateChanged,
     getAuth,
-    signInWithPopup,
-    GoogleAuthProvider,
+    signInWithEmailAndPassword,
     signOut,
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
 } from "firebase/auth";
-import toast from "~/plugins/toast";
 
 export const useUserStore = defineStore("user", () => {
     // 1. Инициализация зависимостей
@@ -24,7 +24,11 @@ export const useUserStore = defineStore("user", () => {
         user.value = useCurrentUser();
     };
 
-    const login = async (email = null, password = null) => {
+    const regitsterWithEmail = async (email, password) => {
+        
+    }
+
+    const login = async () => {
         const auth = getAuth();
 
         try {
@@ -39,14 +43,12 @@ export const useUserStore = defineStore("user", () => {
     const logout = async () => {
         const auth = getAuth();
         if (auth) {
-            signOut(auth);
+            await signOut(auth);
             user.value = null;
             router.push("/");
         } else {
             console.error("Authentication object is null");
         }
-
-        router.replace("/login");
     };
 
     // 5. Хуки
