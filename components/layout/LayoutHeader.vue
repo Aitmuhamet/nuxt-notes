@@ -3,7 +3,7 @@
     <NuxtLink
       v-if="!isNoteEditPage"
       to="/"
-      class="header__title header__title-link py-1 my-3 text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold"
+      class="header__title header__title-link py-1 my-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold"
     >
       <h1>
         Lists
@@ -16,7 +16,7 @@
       v-model="note.title"
       placeholder="List Title"
       ref="labelInput"
-      class="header__title my-3 text-xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold focus:outline-none bg-transparent w-44"
+      class="header__title my-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold focus:outline-none bg-transparent w-44"
     />
 
     <div 
@@ -32,7 +32,7 @@
         <div class="btn-inner">
           <Icon
             name="solar:notification-unread-bold-duotone"
-            class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
+            class=" text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
           />
         </div>
         {{ noteButtonText }}
@@ -47,7 +47,7 @@
         <div class="btn-inner">
           <Icon
             name="solar:notification-unread-broken"
-            class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
+            class=" text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
           />
         </div>
         {{ noteButtonText }}
@@ -62,7 +62,7 @@
         <div class="btn-inner">
           <Icon
             name="solar:notification-unread-lines-broken"
-            class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
+            class=" text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
           />
         </div>
         {{ noteButtonText }}
@@ -92,7 +92,7 @@
           <Icon
             v-else
             name="solar:user-check-rounded-bold-duotone"
-            class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
+            class=" text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
           />
         </div>
         {{ userButtonText }}
@@ -107,7 +107,7 @@
         <div class="btn-inner">
           <Icon
             name="solar:logout-3-bold-duotone"
-            class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
+            class=" text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
           />
         </div>
         {{ userButtonText }}
@@ -122,7 +122,7 @@
         <div class="btn-inner">
           <Icon
             name="solar:login-3-line-duotone"
-            class=" text-3xl sm:text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
+            class=" text-4xl md:text-5xl text-amber-500 hover:text-amber-600"
           />
         </div>
         {{ userButtonText }}
@@ -236,7 +236,7 @@ watchEffect(() => {
   font-family: 'Raleway',
     sans-serif;
   height: auto;
-  padding: 0 .5rem;
+  padding: 0 .25rem;
   background-color: var(--secondary-color);
   border: 1px solid rgba(var(--primary-color), 1);
   -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
@@ -247,7 +247,7 @@ watchEffect(() => {
     font-family: 'Inter';
     font-weight: 400;
     color: #5d5d5d;
-    padding: 1rem .5rem;
+    padding: .5rem .5rem;
 
     &:hover {
       color: rgba(var(--primary-color), 0.8);
@@ -265,20 +265,32 @@ watchEffect(() => {
     height: 100%;
     display: flex;
     align-items: center;
-    transition: transform .3s;
+    transition: transform .3s, color .3s;
 
     &-link:hover {
       transform: scale(1.01);
+      color: rgba(var(--primary-color), 0.8);
     }
 
-    @media (min-width: 1280px) {
-      padding-left: 1.2rem;
-    }
   }
-
+  
   &__user-img {
     border-radius: 10px;
     padding: 0.2rem;
+  }
+}
+@media (min-width: 640px) {
+  .header {
+    padding: 0 .5rem;
+
+    &__btn {
+      padding: 1rem .5rem;
+    }
+  }
+}
+@media (min-width: 1280px) {
+  .header__title {
+    padding-left: 1.2rem;
   }
 }
 

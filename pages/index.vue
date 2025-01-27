@@ -63,6 +63,11 @@ useHead({
     { name: 'description', content: 'All lists in the site.' }
   ]
 });
+definePageMeta({
+  title: 'Lists',
+  description: 'All lists in the site.',
+  middleware: 'auth',
+});
 
 // 1. Инициализация зависимостей
 const noteStore = useNoteStore();
@@ -105,7 +110,7 @@ onMounted(() => {
   border: 1px solid rgba(var(--primary-color), 1);
   border-radius: 8px;
 
-  height: auto;
+  height: 200px;
   max-height: 250px; // Устанавливаем предел высоты
   overflow: hidden;
 
@@ -235,6 +240,7 @@ onMounted(() => {
 
 @media (min-width: 768px) {
   .notes-container {
+    grid-template-columns: repeat(3, 1fr);
     gap: .75rem 1.5rem;
   }
 
@@ -244,6 +250,10 @@ onMounted(() => {
 }
 
 @media (min-width: 1024px) {
+  .notes-container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem 2rem;
+  }
   .note {
     min-height: 215px;
   }

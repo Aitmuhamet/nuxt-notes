@@ -3,14 +3,16 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import {
     getAuth,
+    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    createUserWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
     updateProfile,
 } from "firebase/auth";
 
+import { collection, addDoc } from "firebase/firestore";
+// import { db } from "./../plugins/firebase.client";
 
 export const useUserStore = defineStore("user", () => {
     // 1. Инициализация зависимостей
@@ -51,28 +53,37 @@ export const useUserStore = defineStore("user", () => {
 
     const registerWithEmail = async (email, password, name) => {
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            console.log('userCredential', userCredential);
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            console.log("userCredential", userCredential);
             user.value = useCurrentUser();
 
             await updateProfile(userCredential.user, {
                 displayName: name,
-            }
-            )
+            });
         } catch (error) {
             throw error;
         }
-    }
+    };
 
     const loginWithEmail = async (email, password) => {
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password)
-            console.log('userCredential', userCredential);
+            const userCredential = await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            console.log("userCredential", userCredential);
             user.value = useCurrentUser();
         } catch (error) {
             throw error;
         }
-    }
+    };
+
+
 
     // 5. Хуки
     // 6. Вспомогательные функции
