@@ -88,7 +88,7 @@ export const useNoteStore = defineStore("notes", () => {
         notesData.value = notesData.value.filter((note) => note.id !== noteId);
         saveNotesToLocalStorage();
         toast.success("Deleted", {
-            position: "bottom-center"
+            position: "bottom-right"
         });
     };
 
@@ -110,7 +110,7 @@ export const useNoteStore = defineStore("notes", () => {
 
         saveNotesToLocalStorage();
         toast.success("Saved", {
-            position: "bottom-center"
+            position: "bottom-right"
         });
     };
 

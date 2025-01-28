@@ -117,7 +117,7 @@
         type="button"
         class="btn header__btn"
         aria-label="Logout"
-        @click="router.push('/login')"
+        @click="router.replace('/login')"
       >
         <div class="btn-inner">
           <Icon
@@ -185,7 +185,7 @@ const saveAndNavigate = () => {
     router.push('/');
   } else {
     toast.warning('Title is empry', {
-      position: 'bottom-center'
+      position: 'bottom-right'
     });
   }
 }

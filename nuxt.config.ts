@@ -59,5 +59,6 @@ export default defineNuxtConfig({
   build:{
     // vue-toastification - old commonjs module 
     transpile: ['vue-toastification'],
-  }
+  },
+  plugins: ['~/plugins/firebase.client.js']
 });

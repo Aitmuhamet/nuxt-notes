@@ -25,12 +25,12 @@
     <div class="user-profile__stats">
       <div class="user-profile__stat">
         <span class="user-profile__stat-number">{{ noteStore.todosListsCount }}</span>
-        <span class="user-profile__stat-label">Заметок</span>
+        <span class="user-profile__stat-label">Lists</span>
       </div>
       <div class="user-profile__stat">
         <span class="user-profile__stat-number">{{ noteStore.completedTodosCount }} / {{ noteStore.numberOfTasks
           }}</span>
-        <span class="user-profile__stat-label">Выполненных задач</span>
+        <span class="user-profile__stat-label">Completed tasks</span>
       </div>
     </div>
   </div>

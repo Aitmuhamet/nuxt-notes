@@ -81,13 +81,14 @@
                     @click="router.replace('/register')"
                     class="login-page__link"
                 >
+                    Don't you have an account yet?
                     <Icon
                         name="solar:users-group-rounded-bold-duotone"
                         class=" text-xl text-amber-500 hover:text-amber-600"
                     />
                     Register
                 </button>
-                <a
+                <!-- <a
                     href="/forgot-password"
                     class="login-page__link"
                 >
@@ -96,7 +97,7 @@
                         class=" text-xl text-amber-500 hover:text-amber-600"
                     />
                     Forgot Password?
-                </a>
+                </a> -->
             </div>
         </div>
     </div>
@@ -106,6 +107,7 @@
 
 <script setup>
 import { useUserStore } from '~/store/user';
+import { useToast } from 'vue-toastification'
 // 1. Метаинформация
 useHead({
     title: `Login`, // Подставляем "Untitled", если title еще не загружен
@@ -121,6 +123,7 @@ definePageMeta({
 // 2. Инициализация зависимостей
 const userStore = useUserStore()
 const router = useRouter();
+const toast = useToast();
 
 // 3. Реактивные переменные
 const email = ref('');
@@ -131,17 +134,35 @@ const password = ref('');
 // 6. Методы
 const handleLogin = async () => {
     if (!email.value || !password.value) {
-        alert('Please fill in all fields.');
+        toast.warning('Please fill in all fields.', {
+            position: 'bottom-right'
+        });
         return;
     }
 
-    await userStore.loginWithEmail(email.value, password.value);
-
-    console.log('userStore.user.value', userStore.user.value);
-    
-    if (userStore.user.value) {
+    try {
+        const result = await userStore.loginWithEmail(email.value, password.value);
+        if (!result) {
+            throw new Error('Invalid credentials');
+        }
+        console.log('Login successful!');
         router.replace('/');
+    } catch (error) {
+        console.error('Login error: ', error)
+        console.error('Login message: ', error.message)
+        console.error('Login code: ', error.code)
+
+        if (error.message && error.code) {
+            toast.error('Invalid email or password. Please try again.', {
+                position: 'bottom-right'
+            })
+        } else {
+            toast.error('An unexpected error occured. Please try again later.', {
+                position: 'bottom-right'
+            })
+        }
     }
+
 };
 
 const handleGoogleLogin = () => {
@@ -175,7 +196,7 @@ const handleGoogleLogin = () => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
     @media (min-width: 768px) {
         padding: 8rem 5rem;
         max-width: 450px;
@@ -212,6 +233,7 @@ const handleGoogleLogin = () => {
         background-color: rgba(var(--primary-color), .4);
         transition: width .3s;
     }
+
     &:focus-within,
     &:hover {
         border: 1px solid transparent;
@@ -280,12 +302,13 @@ const handleGoogleLogin = () => {
 }
 
 .login-page__footer {
-    text-align: center;
+    text-align: right;
+    width: 100%;
     margin-top: .5rem;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .login-page__link {

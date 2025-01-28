@@ -112,16 +112,6 @@
                             type="submit"
                             class="btn register-page__button register-page__button--register"
                         >Sign In</button>
-
-                        <button
-                            @click.prevent="handleGoogleLogin"
-                            class="btn register-page__button register-page__button--google"
-                        >
-                            <Icon
-                                name="logos:google-icon"
-                                class=" text-xl sm:text-lg md:text-3xl text-amber-500 hover:text-amber-600"
-                            />
-                        </button>
                     </div>
                 </form>
 
@@ -173,7 +163,7 @@ const confirmPassword = ref('');
 const handleRegister = async () => {
     if (password.value !== confirmPassword.value) {
         toast.error('Passwords do not match', {
-            position: 'bottom-center'
+            position: 'bottom-right'
         });
         return;
     }
@@ -184,14 +174,6 @@ const handleRegister = async () => {
         router.push('/profile');
     }
 }
-
-const handleGoogleLogin = async () => {
-    await userStore.login();
-    if (userStore.user) {
-        router.push('/profile');
-    }
-}
-
 
 </script>
 
